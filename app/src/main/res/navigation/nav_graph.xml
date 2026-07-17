@@ -19,4 +19,9 @@
         android:name="com.example.facemash.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.facemash.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>

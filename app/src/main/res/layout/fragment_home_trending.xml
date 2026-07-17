@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeTrendingFragment">
+    android:background="@drawable/bg_default">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/my_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0658" />
 
+    <ImageView
+        android:id="@+id/btn_setting"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"/>
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/bg_all_game"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="154:24"
+        android:src="@drawable/tv_trending_selected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

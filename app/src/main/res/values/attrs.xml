@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GradientStrokeTextView">
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color"/>
+        <attr name="angle" format="float"/>
+        <attr name="isUseStrokeOnly" format="boolean"/>
+        <attr name="gradientStrokeWidth" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -1,6 +1,5 @@
 package com.example.facemash.utils.config
 
-
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -48,7 +47,8 @@ class DotsIndicatorView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val width = ((dotRadius * 2 * numDots) + (dotSpacing * (numDots - 1)) + paddingLeft + paddingRight).toInt()
+        val width =
+            ((dotRadius * 2 * numDots) + (dotSpacing * (numDots - 1)) + paddingLeft + paddingRight).toInt()
         val height = ((dotRadius * 2) + paddingTop + paddingBottom).toInt()
         setMeasuredDimension(width, height)
     }
@@ -70,7 +70,8 @@ class DotsIndicatorView @JvmOverloads constructor(
             // 2. Vẽ chấm màu hồng/tím biến dạng thành hình thoi/nhộng kéo dãn khi vuốt dở
             if (numDots > 0) {
                 // Tọa độ tâm X của mốc hiện tại (mốc cũ)
-                val leftCx = paddingLeft + dotRadius + currentPosition * (dotRadius * 2 + dotSpacing)
+                val leftCx =
+                    paddingLeft + dotRadius + currentPosition * (dotRadius * 2 + dotSpacing)
 
                 // Tọa độ tâm X của mốc tiếp theo (mốc mới)
                 val rightCx = if (currentPosition < numDots - 1) {
@@ -91,7 +92,8 @@ class DotsIndicatorView @JvmOverloads constructor(
                     endX = leftCx + dotRadius + (positionOffset * 2) * (dotRadius * 2 + dotSpacing)
                 } else {
                     // Cạnh trái bắt đầu co lại về phía mốc mới
-                    startX = leftCx - dotRadius + ((positionOffset - 0.5f) * 2) * (dotRadius * 2 + dotSpacing)
+                    startX =
+                        leftCx - dotRadius + ((positionOffset - 0.5f) * 2) * (dotRadius * 2 + dotSpacing)
                     endX = rightCx + dotRadius
                 }
 

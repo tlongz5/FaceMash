@@ -8,28 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.facemash.databinding.ItemLanguageBinding
 import com.example.magicface.model.LanguageModel
 
-class LanguageAdapter(private val onItemClick: (Int?,Int) -> Unit) :
+class LanguageAdapter(private val onItemClick: (Int?, Int) -> Unit) :
     ListAdapter<LanguageModel, LanguageAdapter.LanguageViewHolder>(LanguageDiffCallback()) {
-    var curPosition : Int? = null
+    var curPosition: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguageViewHolder {
-        val binding = ItemLanguageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemLanguageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LanguageViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: LanguageViewHolder, position: Int) {
         val language = getItem(position)
         holder.itemView.setOnClickListener {
-            onItemClick(curPosition,position)
+            onItemClick(curPosition, position)
             curPosition = position
         }
-        with(holder.binding){
+        with(holder.binding) {
             imgFlag.setImageResource(language.image)
             tvLanguage.text = language.name
-            if (language.isSelected){
+            if (language.isSelected) {
                 imgBackground.setImageResource(language.imgSelected)
                 tvLanguage.setTextColor(tvLanguage.resources.getColor(R.color.white))
-            }else{
+            } else {
                 imgBackground.setImageResource(R.drawable.bg_item_language)
                 tvLanguage.setTextColor(tvLanguage.resources.getColor(R.color.black))
             }

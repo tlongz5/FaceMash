@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.facemash.databinding.ItemIntroBinding
 import com.example.magicface.utils.Helper.introList
 
-class IntroAdapter: RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
+class IntroAdapter : RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -19,7 +19,7 @@ class IntroAdapter: RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
         holder: IntroViewHolder,
         position: Int
     ) {
-        with(holder.binding){
+        with(holder.binding) {
             viewPager.setImageResource(introList[position].image)
             tvName.text = introList[position].name
             tvDes.text = introList[position].des
@@ -30,5 +30,6 @@ class IntroAdapter: RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
         return 3
     }
 
-    inner class IntroViewHolder(val binding: ItemIntroBinding): RecyclerView.ViewHolder(binding.root)
+    inner class IntroViewHolder(val binding: ItemIntroBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

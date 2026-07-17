@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FaceMash"
 include(":app")
- 
+include(":cameraview")

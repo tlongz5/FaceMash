@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,34 +8,200 @@
     android:background="@drawable/bg_home"
     tools:context=".HomeFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/my_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0658" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_trending"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_trending"
+        android:layout_width="0dp"
         android:layout_height="@dimen/_60sdp"
         android:layout_marginBottom="@dimen/_14sdp"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="@dimen/_18sdp"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <View
-            android:id="@+id/home_trending"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <View
-            android:id="@+id/all_game"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <View
-            android:id="@+id/record"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        android:layout_marginStart="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_all_game">
 
+        <ImageView
+            android:id="@+id/bg_trending"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="112:46"
+            android:src="@drawable/ic_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_trending"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_trending"
+            app:layout_constraintBottom_toTopOf="@+id/tv_trending"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+        <com.example.facemash.utils.config.GradientStrokeTextView
+            android:id="@+id/tv_trending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10ssp"
+            android:fontFamily="@font/grandstander_bold"
+            android:gravity="center"
+            android:text="Trending"
+
+            app:startColor="@color/tv_home_un_selected"
+            app:endColor="@color/tv_home_un_selected"
+            app:gradientStrokeWidth="0.8dp"
+            app:isUseStrokeOnly="false"
+
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_trending"
+            app:layout_constraintVertical_weight="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_all_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_trending"
+        app:layout_constraintEnd_toStartOf="@+id/btn_record"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:layout_marginStart="@dimen/_18sdp">
+
+        <ImageView
+            android:id="@+id/bg_all_game"
+            android:src="@drawable/ic_2"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="112:46"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_all_game"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_all_game"
+            app:layout_constraintBottom_toTopOf="@+id/tv_all_game"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+        <com.example.facemash.utils.config.GradientStrokeTextView
+            android:id="@+id/tv_all_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/grandstander_bold"
+            android:gravity="center"
+            android:text="All Game"
+            app:startColor="#3756B1"
+            app:endColor="#3756B1"
+            app:angle="0"
+            android:textColor="@color/white"
+            app:gradientStrokeWidth="0.8dp"
+            app:isUseStrokeOnly="false"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintVertical_weight="1"
+            android:layout_marginBottom="@dimen/_8ssp"
+            app:layout_constraintTop_toBottomOf="@+id/ic_all_game"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_record"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_all_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:layout_marginStart="@dimen/_18sdp">
+
+        <ImageView
+            android:id="@+id/bg_record"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="112:46"
+            android:src="@drawable/ic_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_record"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:src="@drawable/ic_record"
+            app:layout_constraintBottom_toTopOf="@+id/tv_record"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+        <com.example.facemash.utils.config.GradientStrokeTextView
+            android:id="@+id/tv_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/grandstander_bold"
+            android:gravity="center"
+            android:text="Record"
+
+            app:startColor="#3756B1"
+            app:endColor="#3756B1"
+            app:angle="0"
+            app:gradientStrokeWidth="0.8dp"
+            app:isUseStrokeOnly="false"
+
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/white"
+            app:layout_constraintVertical_weight="1"
+            android:layout_marginBottom="@dimen/_8ssp"
+            app:layout_constraintTop_toBottomOf="@+id/ic_record"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

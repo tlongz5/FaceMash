@@ -9,7 +9,9 @@
     <color name="gray">#BEBEBE</color>
     <color name="primary">#D780FC</color>
     <color name="primary_light">#FFAAE3</color>
-    <color name="blue">#81D0F4</color>"
+    <color name="blue">#81D0F4</color>
+    <color name="tv_home_selected">#755755</color>
+    <color name="tv_home_un_selected">#3756B1</color>"
 
 
 </resources>

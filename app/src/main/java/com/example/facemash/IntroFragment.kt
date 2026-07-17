@@ -1,20 +1,13 @@
 package com.example.facemash
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.facemash.databinding.FragmentIntroBinding
 import com.example.magicface.base.BaseFragment
-import com.example.magicface.model.IntroPager
-import com.example.magicface.utils.Helper.introList
 import com.example.magicface.utils.setSingleClick
 
-class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::inflate){
+class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::inflate) {
     private val introAdapter = IntroAdapter()
-    private var count =0
+    private var count = 0
 
     override fun FragmentIntroBinding.initView() {
         viewPager.adapter = introAdapter
@@ -24,7 +17,6 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
 
         viewPager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
-
                 override fun onPageScrolled(
                     position: Int,
                     positionOffset: Float,
@@ -34,6 +26,7 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
                 }
 
                 override fun onPageSelected(position: Int) {
+                    count = position
                     dotIndicator.setCurrentItem(position)
                 }
             }
@@ -43,8 +36,8 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
     override fun FragmentIntroBinding.initListener() {
         btnNext.setSingleClick {
             ++count
-//            if (count>3) navigateTo(l)
-            viewPager.currentItem =count
+            if (count == 3) navigateTo(R.id.homeFragment)
+            else viewPager.currentItem = count
         }
     }
 
@@ -55,5 +48,4 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
     override fun onDestroyView() {
         super.onDestroyView()
     }
-
 }
