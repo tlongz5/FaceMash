@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.mlkit:face-mesh-detection:16.0.0-beta1")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     implementation("com.airbnb.android:lottie:6.4.0")

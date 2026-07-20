@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingFragment"
-    android:background="@drawable/bg_default">
+    tools:context=".view.SettingFragment"
+    android:background="@drawable/bg_home">
 
     <ImageView
         android:id="@+id/btn_back"
@@ -26,14 +26,14 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_22sdp"
         android:textStyle="bold"
-        app:endColor="@color/black"
-
-        app:gradientStrokeWidth="1dp"
+        app:gradientEndColor="@color/white"
+        app:gradientStartColor="@color/white"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_back"
-        app:startColor="@color/black" />
+        app:layout_constraintTop_toTopOf="@+id/btn_back"/>
 
     <com.example.facemash.utils.config.GradientStrokeTextView
         android:id="@+id/about"
@@ -43,12 +43,13 @@
         android:text="About"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
-        app:endColor="@color/black"
+        app:gradientEndColor="@color/white"
+        app:gradientStartColor="@color/white"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/black"
         android:layout_marginTop="@dimen/_8sdp"
-        app:gradientStrokeWidth="1dp"
         app:layout_constraintStart_toStartOf="@+id/btn_back"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back"
-        app:startColor="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_1"
@@ -63,7 +64,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_14sdp">
+            android:padding="@dimen/_14sdp"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/_22sdp"
@@ -183,13 +185,16 @@
         android:text="Term \\ Privacy"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
-        app:endColor="@color/black"
-        app:gradientStrokeWidth="1dp"
+
+        app:gradientEndColor="@color/white"
+        app:gradientStartColor="@color/white"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/black"
+
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_6sdp"
         app:layout_constraintStart_toStartOf="@+id/btn_back"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_1"
-        app:startColor="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/constraint_1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

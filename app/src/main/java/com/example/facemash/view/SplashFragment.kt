@@ -1,14 +1,12 @@
-package com.example.facemash
+package com.example.facemash.view
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.facemash.R
 import com.example.facemash.databinding.FragmentSplashBinding
 import com.example.magicface.base.BaseFragment
+import com.example.magicface.utils.PreferenceUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
@@ -16,7 +14,6 @@ import kotlin.time.Duration.Companion.milliseconds
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate){
     override fun FragmentSplashBinding.initView() {
         // load
-        findNavController().navigate(R.id.languageFragment)
 
         viewLifecycleOwner.lifecycleScope.launch {
             loading1.visibility = View.VISIBLE
@@ -29,7 +26,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             loading1.visibility = View.GONE
             delay(2500.milliseconds)
 
-            findNavController().navigate(R.id.languageFragment)
+            val isFirstLaunch = PreferenceUtils.getValue("is_first_launch", true)
+            if (isFirstLaunch) {
+                findNavController().navigate(R.id.languageFragment)
+            } else {
+                findNavController().navigate(R.id.homeFragment)
+            }
         }
     }
 

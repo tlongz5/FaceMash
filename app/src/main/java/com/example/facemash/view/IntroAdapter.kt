@@ -1,4 +1,4 @@
-package com.example.facemash
+package com.example.facemash.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

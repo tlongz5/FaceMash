@@ -1,12 +1,9 @@
-package com.example.facemash
+package com.example.facemash.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.facemash.R
 import com.example.facemash.databinding.FragmentLanguageBinding
 import com.example.magicface.base.BaseFragment
 import com.example.magicface.utils.Helper
@@ -46,6 +43,8 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     override fun FragmentLanguageBinding.initListener() {
         btnDone.setSingleClick {
             // Handle change language
+            val languageCode = Helper.languageList.first { it.isSelected }.languageCode
+
             navigateTo(R.id.introFragment)
         }
     }

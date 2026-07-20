@@ -7,21 +7,44 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.example.facemash.LanguageFragment"
+        android:name="com.example.facemash.view.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.facemash.SplashFragment"
+        android:name="com.example.facemash.view.SplashFragment"
         android:label="SplashFragment" />
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.facemash.IntroFragment"
+        android:name="com.example.facemash.view.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.facemash.HomeFragment"
+        android:name="com.example.facemash.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/lipPoseFragment"
+        android:name="com.example.facemash.view.LipPoseFragment"
+        android:label="LipPoseFragment" />
+    <fragment
+        android:id="@+id/thisOrThatFragment"
+        android:name="com.example.facemash.view.ThisOrThatFragment"
+        android:label="fragment_this_or_that"
+        tools:layout="@layout/fragment_this_or_that" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.facemash.view.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/videoPreviewFragment"
+        android:name="com.example.magicface.view.VideoPreviewFragment"
+        android:label="VideoPreviewFragment" />
+    <fragment
+        android:id="@+id/songPickerFragment"
+        android:name="com.example.facemash.view.SongPickerFragment"
+        android:label="SongPickerFragment" />
+
 </navigation>

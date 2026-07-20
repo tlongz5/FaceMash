@@ -1,84 +1,236 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LipPoseFragment">
+    tools:context=".view.MainActivity">
 
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cameraFacing="front"
+        android:keepScreenOn="false"
         app:cameraAudio="on"
-        app:cameraFlash="auto"
-        app:cameraVideoCodec="h264"
         app:cameraEngine="camera2"
+        app:cameraFacing="front"
+        app:cameraFlash="auto"
         app:cameraMode="video"
-        app:cameraPreview="glSurface"/>
+        app:cameraPlaySounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bg_score"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/bg_quiz_score"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15"
+                app:layout_constraintWidth_percent="0.35" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/bg_score"
+                app:layout_constraintEnd_toEndOf="@id/bg_score"
+                app:layout_constraintStart_toStartOf="@id/bg_score"
+                app:layout_constraintTop_toTopOf="@id/bg_score" />
+
+            <ImageView
+                android:id="@+id/img_scan"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_scan"
+                android:visibility="gone"
+                app:layout_constraintDimensionRatio="412:94.89"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.otaliastudios.cameraview.CameraView>
+
+    <ImageView
+        android:id="@+id/img_lip_pose"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:src="@drawable/bg_lip_pose"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="344:256"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <ImageView
+        android:id="@+id/img_lamp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_lamp2"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/btn_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_music_gradient"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_lamp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_lamp">
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:src="@drawable/ic_music" />
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="Lip Puzzle"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_14ssp" />
+
+        <LinearLayout
+            android:id="@+id/layout_exit_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp">
+            <View
+                android:layout_width="@dimen/_2sdp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"
+                android:layout_marginEnd="@dimen/_6sdp" />
+
+            <ImageView
+                android:id="@+id/btn_exit_music"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_exit"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/btn_start"
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_64sdp"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="12dp"
         android:src="@drawable/ic_start"
-        android:layout_marginBottom="@dimen/_18sdp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="188:56"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/btn_stop"
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_64sdp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="12dp"
         android:src="@drawable/ic_stop"
         android:visibility="gone"
-        android:layout_marginBottom="@dimen/_18sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="26:52"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_back"
-        android:layout_marginTop="@dimen/_36sdp"
-        android:layout_marginStart="@dimen/_18sdp"
+        android:id="@+id/img_filter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:src="@drawable/img_ranking"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_start"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btn_start" />
 
-    <TextView
-        android:id="@+id/btn_add_sound"
+    <com.example.facemash.utils.config.GradientStrokeTextView
+        android:id="@+id/tv_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/_12sdp"
-        android:fontFamily="@font/nunito_semi_bold"
-        android:text="@string/add_sound"
-        android:gravity="center"
-        android:background="@drawable/bg_music_gradient"
-        android:paddingVertical="@dimen/_10sdp"
-        android:paddingHorizontal="@dimen/_20sdp"
+        android:fontFamily="@font/grandstander_extrabold"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:text="Ranking"
+
         android:textColor="@color/white"
-        app:drawableStartCompat="@drawable/ic_music"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintEnd_toStartOf="@+id/btn_answer_question"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
-        app:layout_constraintTop_toTopOf="@+id/btn_back" />
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="@+id/img_filter"
+        app:layout_constraintStart_toStartOf="@+id/img_filter"
+        app:layout_constraintTop_toBottomOf="@+id/img_filter"
+
+        app:shadowColor="#000000"
+        app:shadowDy="2dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="0.5dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_countdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60000000"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/btn_answer_question"
-        android:layout_width="@dimen/_42sdp"
-        android:layout_height="@dimen/_42sdp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_lamp2"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+        android:id="@+id/img_lip"
+        android:visibility="gone"
+        android:translationY="-300dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_back" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

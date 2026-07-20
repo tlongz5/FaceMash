@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Màu nền: #FFFFFF -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- Bo góc: 99px (để 50dp là đủ bo tròn hoàn toàn 2 đầu) -->
+    <corners android:radius="50dp" />
+
+</shape>

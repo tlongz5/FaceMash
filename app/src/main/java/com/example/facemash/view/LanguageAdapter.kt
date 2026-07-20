@@ -1,10 +1,11 @@
-package com.example.facemash
+package com.example.facemash.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.facemash.R
 import com.example.facemash.databinding.ItemLanguageBinding
 import com.example.magicface.model.LanguageModel
 

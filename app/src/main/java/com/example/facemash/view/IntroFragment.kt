@@ -1,8 +1,10 @@
-package com.example.facemash
+package com.example.facemash.view
 
 import androidx.viewpager2.widget.ViewPager2
+import com.example.facemash.R
 import com.example.facemash.databinding.FragmentIntroBinding
 import com.example.magicface.base.BaseFragment
+import com.example.magicface.utils.PreferenceUtils
 import com.example.magicface.utils.setSingleClick
 
 class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::inflate) {
@@ -36,8 +38,10 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
     override fun FragmentIntroBinding.initListener() {
         btnNext.setSingleClick {
             ++count
-            if (count == 3) navigateTo(R.id.homeFragment)
-            else viewPager.currentItem = count
+            if (count == 3) {
+                PreferenceUtils.setValue("is_first_launch", false)
+                navigateTo(R.id.homeFragment)
+            } else viewPager.currentItem = count
         }
     }
 

@@ -60,19 +60,19 @@ fun getJsonFromRaw(context: Context, @RawRes resourceId: Int): String? {
         null
     }
 }
-//
-//fun playMusic(music: MusicData){
-//    try {
-//        MusicPlayerInstance.stop()
-//        Log.d("SongPickerFragment", "Selected music: 1")
-//        if (music.url.isNotEmpty()) {
-//            Log.d("SongPickerFragment", "Selected music: ok")
-//            MusicPlayerInstance.play(music.url)
-//        }
-//    }catch (e: Exception){
-//        e.printStackTrace()
-//    }
-//}
+
+fun playMusic(music: MusicData){
+    try {
+        MusicPlayerInstance.stop()
+        Log.d("SongPickerFragment", "Selected music: 1")
+        if (music.url.isNotEmpty()) {
+            Log.d("SongPickerFragment", "Selected music: ok")
+            MusicPlayerInstance.play(music.url)
+        }
+    }catch (e: Exception){
+        e.printStackTrace()
+    }
+}
 
 fun Context.setAppLocale(languageCode: String): Context {
     val locale = Locale(languageCode)

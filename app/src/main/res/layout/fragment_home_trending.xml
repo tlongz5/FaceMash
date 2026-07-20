@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_default">
+    android:background="@drawable/bg_home">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/my_horizontal_guideline"
@@ -13,6 +13,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.0658" />
+
+    <ImageView
+        android:id="@+id/img_above"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_home_above"
+        app:layout_constraintDimensionRatio="412:120"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/btn_setting"
