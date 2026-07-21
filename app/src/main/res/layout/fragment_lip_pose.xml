@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.main.MainActivity">
 
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/cameraView"
@@ -98,7 +98,7 @@
 
     <LinearLayout
         android:id="@+id/btn_music"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_150sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_music_gradient"
         android:gravity="center_vertical"
@@ -117,13 +117,15 @@
             android:src="@drawable/ic_music" />
 
         <TextView
-            android:id="@+id/tvText"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvMusic"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:text="Lip Puzzle"
+            android:maxLines="1"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/_14ssp" />
 

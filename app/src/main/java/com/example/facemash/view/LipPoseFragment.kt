@@ -21,12 +21,18 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import com.example.facemash.R
 import androidx.core.graphics.createBitmap
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.facemash.databinding.FragmentLipPoseBinding
 import com.example.facemash.model.Point
+import com.example.facemash.view.main.MainViewModel
 import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.setScaleUp
+import com.example.magicface.utils.MusicPlayerInstance
+import com.example.magicface.utils.hide
+import com.example.magicface.utils.logd
+import com.example.magicface.utils.playMusic
 import com.example.magicface.utils.setSingleClick
+import com.example.magicface.utils.show
 import com.example.magicface.utils.showToast
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
@@ -39,6 +45,7 @@ import com.otaliastudios.cameraview.VideoResult
 import com.otaliastudios.cameraview.controls.AudioCodec
 import com.otaliastudios.cameraview.size.AspectRatio
 import com.otaliastudios.cameraview.size.SizeSelectors
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,7 +55,9 @@ import kotlin.math.abs
 import kotlin.math.hypot
 import kotlin.time.Duration.Companion.milliseconds
 
+@AndroidEntryPoint
 class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBinding::inflate) {
+    private val viewModel: MainViewModel by activityViewModels()
 
     private var listLipPose = mutableListOf<Bitmap>()
     private val activeFallingLips = mutableListOf<ImageView>()
@@ -70,17 +79,37 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
     private var score = 0
 
     override fun FragmentLipPoseBinding.initView() {
+        initMusic()
         setupCameraView()
         setupView()
+    }
+
+    private fun initMusic() {
+        viewModel.selectedMusic.observe(viewLifecycleOwner){ musicData ->
+            if(musicData != null) {
+                playMusic(musicData)
+                binding.tvMusic.text = musicData.name
+            }else{
+                binding.tvMusic.text = "No Sound"
+                binding.layoutExitMusic.hide()
+            }
+        }
     }
 
     override fun FragmentLipPoseBinding.initListener() {
         btnMusic.setSingleClick {
             navigateTo(R.id.songPickerFragment)
         }
+        btnExitMusic.setSingleClick {
+            viewModel.setSelectedMusic(null)
+        }
 
         imgLamp.setSingleClick {
 
+        }
+
+        imgFilter.setSingleClick {
+            navigateTo(R.id.homeFragment)
         }
     }
 
@@ -101,6 +130,8 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
             override fun onVideoRecordingStart() {
                 super.onVideoRecordingStart()
                 isRecording = true
+
+                playMusic(viewModel.selectedMusic.value!!)
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     binding.imgScan.animate()
@@ -186,7 +217,8 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
             override fun onCameraError(exception: CameraException) {
                 super.onCameraError(exception)
                 // when no permission granted
-                showToast(requireContext(), "Camera error")
+                showToast(requireContext(), "Camera error. Bug: $exception")
+                logd("Camera error. Bug: $exception")
                 Log.e("TAGhkhhkhk", "Camera error", exception)
             }
         })
@@ -220,7 +252,7 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
         Log.d("TAGhkhhkhk", "Come here 3" )
 
         binding.cameraView.apply {
-            setLifecycleOwner(this@LipPoseFragment)
+            setLifecycleOwner(viewLifecycleOwner)
             audioBitRate = 320000
             audioCodec = AudioCodec.AAC
             videoBitRate = 5000000
@@ -240,7 +272,11 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
                     InputImage.IMAGE_FORMAT_NV21
                 )
 
-                val faceMeshes = Tasks.await(detector.process(inputImage))
+                val faceMeshes = try {
+                    Tasks.await(detector.process(inputImage))
+                } catch (e: Exception) {
+                    return@addFrameProcessor
+                }
 
                 if (faceMeshes.isEmpty()) {
                     return@addFrameProcessor
@@ -416,19 +452,6 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
         }
     }
 
-    private fun comparePoint(P1: Point, P2: Point){
-        val x = abs(P1.x - P2.x)
-        val y = abs(P1.y - P2.y)
-
-        // Calculate the distance between two points
-        val distance = hypot(x.toDouble(), y.toDouble()).toFloat()
-        val threshold = getScreenSize(requireContext()).first * 0.3f
-        if (distance < threshold) {
-            showToast(requireContext(), "Correct")
-            score++
-        }
-    }
-
     private fun startRecording() {
         if (isRecording) return
         val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES),"Test")
@@ -441,20 +464,22 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
 
         try {
             this.lifecycleScope.launch {
-                binding.imgLamp.visibility  = View.GONE
-                binding.imgLipPose.visibility = View.GONE
-                binding.imgIcon.visibility = View.GONE
-                binding.tvText.visibility = View.GONE
-                binding.imgFilter.visibility = View.GONE
+                binding.imgLamp.hide()
+                binding.imgLipPose.hide()
+                binding.imgIcon.hide()
+                binding.tvMusic.hide()
+                binding.imgFilter.hide()
+                binding.btnMusic.hide()
+                binding.tvFilter.hide()
 
 
-                binding.layoutCountdown.visibility = View.VISIBLE
+                binding.layoutCountdown.show()
                 delay(1000.milliseconds)
                 binding.tvCount.text = "2"
                 delay(1000.milliseconds)
                 binding.tvCount.text = "1"
                 delay(1000.milliseconds)
-                binding.layoutCountdown.visibility = View.GONE
+                binding.layoutCountdown.hide()
 
                 //start record
                 isStartGame1=true
@@ -471,8 +496,14 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
     }
 
     override fun onDestroyView() {
+        binding.cameraView.clearFrameProcessors()
+        activeFallingLips.clear()
         super.onDestroyView()
-        detector.close()
+        MusicPlayerInstance.stop()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        detector.close()
+    }
 }

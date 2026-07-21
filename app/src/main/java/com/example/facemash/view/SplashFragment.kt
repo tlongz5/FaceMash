@@ -14,6 +14,7 @@ import kotlin.time.Duration.Companion.milliseconds
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate){
     override fun FragmentSplashBinding.initView() {
         // load
+        findNavController().navigate(R.id.homeFragment)
 
         viewLifecycleOwner.lifecycleScope.launch {
             loading1.visibility = View.VISIBLE

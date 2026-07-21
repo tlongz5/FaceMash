@@ -22,7 +22,7 @@
         android:theme="@style/Theme.App.Starting"
         android:supportsRtl="true">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.main.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

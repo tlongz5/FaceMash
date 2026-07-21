@@ -46,5 +46,20 @@
         android:id="@+id/songPickerFragment"
         android:name="com.example.facemash.view.SongPickerFragment"
         android:label="SongPickerFragment" />
+    <fragment
+        android:id="@+id/myDownloadFragment"
+        android:name="com.example.facemash.view.MyDownloadFragment"
+        android:label="fragment_my_download"
+        tools:layout="@layout/fragment_my_download" />
+    <fragment
+        android:id="@+id/princessOrWitchFragment"
+        android:name="com.example.facemash.view.PrincessOrWitchFragment"
+        android:label="fragment_princess_or_witch"
+        tools:layout="@layout/fragment_princess_or_witch" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.facemash.view.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
 
 </navigation>

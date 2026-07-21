@@ -4,14 +4,17 @@ import android.content.ContentValues
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
+import com.example.facemash.R
 import com.example.facemash.databinding.FragmentVideoPreviewBinding
 import com.example.magicface.base.BaseFragment
 import com.example.magicface.utils.PlayerInstance.pause
 import com.example.magicface.utils.PlayerInstance.play
 import com.example.magicface.utils.PlayerInstance.player
 import com.example.magicface.utils.PlayerInstance.stop
+import com.example.magicface.utils.setSingleClick
 import com.example.magicface.utils.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,18 +37,27 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
     }
 
     override fun FragmentVideoPreviewBinding.initListener() {
-        btnSave.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch{
-                val uri = withContext(Dispatchers.IO){
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-                        saveVideoForAndroid10AndAbove()
-                    else saveVideoForAndroid9AndBelow()
-                }
-                if(uri == null) showToast(requireContext(), "Failed to save video")
-                else showToast(requireContext(), "Video saved successfully")
-
-            }
+        btnBack.setSingleClick {
+            navigateUp()
         }
+        btnNext.setSingleClick {
+            navigateTo(R.id.myDownloadFragment, Bundle().apply {
+                putString("video_path", videoPath)
+            })
+        }
+
+//        btnSave.setOnClickListener {
+//            viewLifecycleOwner.lifecycleScope.launch{
+//                val uri = withContext(Dispatchers.IO){
+//                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+//                        saveVideoForAndroid10AndAbove()
+//                    else saveVideoForAndroid9AndBelow()
+//                }
+//                if(uri == null) showToast(requireContext(), "Failed to save video")
+//                else showToast(requireContext(), "Video saved successfully")
+//
+//            }
+//        }
     }
 
     //DEBUGGGGGGGGGGG

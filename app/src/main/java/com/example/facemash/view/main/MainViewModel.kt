@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.main
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.baseproject.model.MusicData
 import com.example.facemash.R
+import com.example.facemash.view.LocalRepo
 import com.example.magicface.model.Game
 import com.example.magicface.model.TrendingData
 import com.example.magicface.utils.getJsonFromRaw
@@ -20,16 +21,10 @@ class MainViewModel @Inject constructor(
     private val localRepo: LocalRepo
 ): ViewModel() {
     val game = listOf(
-        Game(
-            id = "face0",
-            categoryItem = "Face Puzzle",
-            name = "Face Puzzle",
-            type = "Face Puzzle",
-            category = "Face Puzzle",
-            questions = listOf(),
-            thumb = "face",
-            isFamous = false
-        )
+        R.drawable.img_ranking to "Ranking",
+        R.drawable.img_this_or_that to "This Or That",
+        R.drawable.img_lip_poses to "Lip Pose",
+        R.drawable.img_princess_or_witch to "Princess Or Witch"
     )
 
     private val _gamesData = MutableLiveData<List<Game>>()
@@ -66,7 +61,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setSelectedMusic(musicData: MusicData){
+    fun setSelectedMusic(musicData: MusicData?){
         _selectedMusic.value = musicData
     }
 }

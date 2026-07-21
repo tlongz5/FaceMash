@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.main
 
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -9,6 +9,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.facemash.databinding.ActivityMainBinding
+import com.example.facemash.view.NetworkReceiver
 import com.example.magicface.utils.logd
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
-    private val networkReceiver = NetworkReceiver(this){
-        with(mainViewModel){
+    private val networkReceiver = NetworkReceiver(this) {
+        with(mainViewModel) {
             getMusicData(this@MainActivity)
             getTrendingData()
             getGamesData(this@MainActivity)

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/view_question"
+        layout="@layout/layout_quiz_item_question"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_min="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="220dp"
+        app:layout_constraintWidth_min="220dp" />
+
+    <ImageView
+        android:id="@+id/capy_left"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="-16dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_capy_left"
+        app:layout_constraintBottom_toTopOf="@id/view_question"
+        app:layout_constraintStart_toStartOf="@id/view_question" />
+
+    <ImageView
+        android:id="@+id/capy_right"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="-16dp"
+        android:layout_marginBottom="-32dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_capy_right"
+        app:layout_constraintBottom_toTopOf="@id/view_question"
+        app:layout_constraintEnd_toEndOf="@id/view_question" />
+
+    <include
+        android:id="@+id/view_answer_left"
+        layout="@layout/layout_quiz_item_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toStartOf="@id/view_answer_right"
+        app:layout_constraintHeight_min="85dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/left_constraint"
+        app:layout_constraintTop_toBottomOf="@id/left_constraint"
+        app:layout_constraintWidth_max="160dp"
+        app:layout_constraintWidth_min="130dp" />
+
+    <include
+        android:id="@+id/view_answer_right"
+        layout="@layout/layout_quiz_item_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/view_answer_left"
+        app:layout_constraintEnd_toEndOf="@id/right_constraint"
+        app:layout_constraintHeight_min="85dp"
+        app:layout_constraintStart_toEndOf="@id/view_answer_left"
+        app:layout_constraintTop_toTopOf="@id/view_answer_left"
+        app:layout_constraintWidth_max="150dp"
+        app:layout_constraintWidth_min="130dp" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/left_constraint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-23dp"
+        android:layout_marginEnd="88dp"
+        android:importantForAccessibility="no"
+        android:rotation="3"
+        android:src="@drawable/ic_constraint_left"
+        app:layout_constraintDimensionRatio="43:57"
+        app:layout_constraintEnd_toStartOf="@id/right_constraint"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/view_question"
+        app:layout_constraintTop_toBottomOf="@id/view_question"
+        app:layout_constraintWidth_percent="0.1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/right_constraint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-15dp"
+        android:importantForAccessibility="no"
+        android:rotation="-7"
+        android:src="@drawable/ic_constraint_right"
+        app:layout_constraintDimensionRatio="47:42"
+        app:layout_constraintEnd_toEndOf="@id/view_question"
+        app:layout_constraintStart_toEndOf="@id/left_constraint"
+        app:layout_constraintTop_toBottomOf="@id/view_question"
+        app:layout_constraintWidth_percent="0.109" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
