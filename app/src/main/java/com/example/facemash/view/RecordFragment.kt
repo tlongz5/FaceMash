@@ -1,7 +1,7 @@
 package com.example.facemash.view
 
 import com.example.facemash.databinding.FragmentRecordBinding
-import com.example.magicface.base.BaseFragment
+import com.example.facemash.base.BaseFragment
 
 class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding::inflate){
     override fun FragmentRecordBinding.initView() {

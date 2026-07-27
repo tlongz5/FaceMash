@@ -1,4 +1,4 @@
-package com.example.magicface.base
+package com.example.facemash.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.example.magicface.utils.checkIfFragmentAttached
+import com.example.facemash.utils.checkIfFragmentAttached
 
 abstract class BaseFragment<T: ViewBinding>(
     private val bindingInflater: (

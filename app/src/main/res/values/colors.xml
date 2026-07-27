@@ -12,4 +12,6 @@
     <color name="blue">#81D0F4</color>
     <color name="tv_home_selected">#755755</color>
     <color name="tv_home_un_selected">#3756B1</color>
+    <color name="bg_tag">#20000000</color>
+    <color name="tv_tag_selected">#0E1372</color>"
 </resources>

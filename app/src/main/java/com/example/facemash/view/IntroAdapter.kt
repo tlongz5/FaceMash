@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.facemash.databinding.ItemIntroBinding
-import com.example.magicface.utils.Helper.introList
+import com.example.facemash.utils.Helper.introList
 
 class IntroAdapter : RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
     override fun onCreateViewHolder(

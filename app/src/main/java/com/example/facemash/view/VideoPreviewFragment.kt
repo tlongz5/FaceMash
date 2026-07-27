@@ -1,4 +1,4 @@
-package com.example.magicface.view
+package com.example.facemash.view
 
 import android.content.ContentValues
 import android.media.MediaScannerConnection
@@ -9,13 +9,13 @@ import android.provider.MediaStore
 import androidx.lifecycle.lifecycleScope
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentVideoPreviewBinding
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.PlayerInstance.pause
-import com.example.magicface.utils.PlayerInstance.play
-import com.example.magicface.utils.PlayerInstance.player
-import com.example.magicface.utils.PlayerInstance.stop
-import com.example.magicface.utils.setSingleClick
-import com.example.magicface.utils.showToast
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.PlayerInstance.pause
+import com.example.facemash.utils.PlayerInstance.play
+import com.example.facemash.utils.PlayerInstance.player
+import com.example.facemash.utils.PlayerInstance.stop
+import com.example.facemash.utils.setSingleClick
+import com.example.facemash.utils.showToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -66,7 +66,7 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
         return try {
             val moviesDir = File(
                 requireContext().getExternalFilesDir(android.os.Environment.DIRECTORY_MOVIES),
-                "MagicFace"
+                "FaceMash"
             )
             if (!moviesDir.exists() && !moviesDir.mkdirs()) {
                 return null
@@ -97,7 +97,7 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
         val values = ContentValues().apply {
             put(MediaStore.Video.Media.DISPLAY_NAME, videoFile.name)
             put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/MagicFace")
+            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/FaceMash")
 
             // Add more metadata if needed
             put(MediaStore.Video.Media.IS_PENDING, 1)

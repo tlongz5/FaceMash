@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.baseproject.model.MusicData
 import com.example.facemash.databinding.FragmentSongPickerBinding
 import com.example.facemash.view.main.MainViewModel
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.PlayerInstance.stop
-import com.example.magicface.utils.playMusic
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.PlayerInstance.stop
+import com.example.facemash.utils.playMusic
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.facemash.R
 import com.example.facemash.databinding.ItemLanguageBinding
-import com.example.magicface.model.LanguageModel
+import com.example.facemash.model.LanguageModel
 
 class LanguageAdapter(private val onItemClick: (Int?, Int) -> Unit) :
     ListAdapter<LanguageModel, LanguageAdapter.LanguageViewHolder>(LanguageDiffCallback()) {

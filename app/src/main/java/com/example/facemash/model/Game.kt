@@ -1,4 +1,4 @@
-package com.example.magicface.model
+package com.example.facemash.model
 
 import com.example.baseproject.model.Question
 

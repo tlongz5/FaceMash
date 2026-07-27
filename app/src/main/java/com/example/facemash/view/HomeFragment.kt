@@ -6,10 +6,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentHomeBinding
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.setScaleDown
-import com.example.magicface.utils.setScaleUp
-import com.example.magicface.utils.setSingleClick
+import com.example.facemash.view.hometrending.HomeTrendingFragment
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.setScaleDown
+import com.example.facemash.utils.setScaleUp
+import com.example.facemash.utils.setSingleClick
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     override fun FragmentHomeBinding.initView() {

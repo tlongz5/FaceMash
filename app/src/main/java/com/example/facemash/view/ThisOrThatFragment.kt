@@ -24,18 +24,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.createBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.baseproject.model.Question
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentThisOrThatBinding
 import com.example.facemash.view.main.MainViewModel
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.DimenExt
-import com.example.magicface.utils.MusicPlayerInstance
-import com.example.magicface.utils.hide
-import com.example.magicface.utils.logd
-import com.example.magicface.utils.playMusic
-import com.example.magicface.utils.setSingleClick
-import com.example.magicface.utils.show
-import com.example.magicface.utils.showToast
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.Constants
+import com.example.facemash.utils.DimenExt
+import com.example.facemash.utils.MusicPlayerInstance
+import com.example.facemash.utils.hide
+import com.example.facemash.utils.logd
+import com.example.facemash.utils.playMusic
+import com.example.facemash.utils.setSingleClick
+import com.example.facemash.utils.show
+import com.example.facemash.utils.showToast
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
@@ -62,7 +64,7 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     private var isStartGame = false
     private var isAnswering = false
 
-    private var questions: List<com.example.baseproject.model.Question> = listOf()
+    private var questions: List<Question> = listOf()
     private var currentQuestionIndex = 0
 
     private var currentLeftRotation = 0f
@@ -75,6 +77,10 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     private var currentRightTranslationY = 0f
 
     private val tiltThreshold = 5f
+
+    private var isAnswered = false
+    private var index = 0
+    private var score = 0
 
     private val detector = FaceDetection.getClient(
         FaceDetectorOptions.Builder()
@@ -118,10 +124,18 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     private fun updateQuestion() {
         if (questions.isNotEmpty() && currentQuestionIndex < questions.size) {
             val question = questions[currentQuestionIndex]
-            binding.quizGame.viewAnswerLeft.txtAnswer.text = question.trueAnswer
-            binding.quizGame.viewAnswerRight.txtAnswer.text = question.falseAnswer
+            if(question.trueSide == 0){
+                binding.quizGame.viewAnswerLeft.txtAnswer.text = question.trueAnswer
+                binding.quizGame.viewAnswerRight.txtAnswer.text = question.falseAnswer
+            }
+            else{
+                binding.quizGame.viewAnswerLeft.txtAnswer.text = question.falseAnswer
+                binding.quizGame.viewAnswerRight.txtAnswer.text = question.trueAnswer
+            }
             binding.quizGame.viewQuestion.txtQuestion.text = question.question
             binding.quizGame.viewQuestion.txtQuestion.show()
+            binding.quizGame.viewAnswerLeft.txtAnswer.show()
+            binding.quizGame.viewAnswerRight.txtAnswer.show()
         }
     }
 
@@ -245,19 +259,32 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
                 val viewRight = binding.quizGame.viewAnswerRight.root
 
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                    if (isStartGame) {
-                        handleLogic(eulerZ, viewLeft, viewRight)
-                    } else {
-                        if (eulerZ > tiltThreshold) {
-                            // Nghiêng sang phải
-                            handleRightBeforeStart(eulerZ, viewLeft, viewRight)
-                        } else if (eulerZ < -tiltThreshold) {
-                            // Nghiêng sang trái
-                            handleLeftBeforeStart(eulerZ, viewLeft, viewRight)
+                    if (eulerZ > tiltThreshold) {
+                        handleRightBeforeStart(eulerZ, viewLeft, viewRight)
+                    } else if (eulerZ < -tiltThreshold) {
+                        handleLeftBeforeStart(eulerZ, viewLeft, viewRight)
+                    }else {
+                        // Đầu đang ở giữa
+                        if (isStartGame && isAnswering) {
+                            // Nếu game đang chạy và NGƯỜI CHƠI VỪA TRẢ LỜI XONG -> Next câu hỏi
+                            nextQuestion(viewLeft, viewRight)
                         } else {
+                            // Nếu chưa trả lời gì cả thì chỉ giữ UI ở trạng thái cân bằng
                             resetViews(viewLeft, viewRight)
                         }
                     }
+
+
+//                        if (eulerZ > tiltThreshold) {
+//                            // Nghiêng sang phải
+//                            handleRightBeforeStart(eulerZ, viewLeft, viewRight)
+//                        } else if (eulerZ < -tiltThreshold) {
+//                            // Nghiêng sang trái
+//                            handleLeftBeforeStart(eulerZ, viewLeft, viewRight)
+//                        } else {
+//                            resetViews(viewLeft, viewRight)
+//                        }
+
                 }
 
 
@@ -266,8 +293,31 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
         }
 
     }
+    private fun resetGameView() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            isAnswered = false
+            index = 0
+            score = 0
+
+            binding.quizGame.viewAnswerLeft.root.setBackgroundResource(R.drawable.bg_item_quiz)
+            binding.quizGame.viewAnswerRight.root.setBackgroundResource(R.drawable.bg_item_quiz)
+            binding.quizGame.viewAnswerLeft.root.rotation = 0f
+            binding.quizGame.viewAnswerLeft.root.translationX = 0f
+            binding.quizGame.viewAnswerRight.root.rotation = 0f
+            binding.quizGame.viewAnswerRight.root.translationX = 0f
+            binding.quizGame.viewAnswerLeft.root.translationY = 0f
+            binding.quizGame.viewAnswerRight.root.translationY = 0f
+
+        }
+    }
+
+
 
     private fun resetViews(viewLeft: View, viewRight: View) {
+        isAnswering = false
+        binding.quizGame.viewAnswerLeft.root.setBackgroundResource(R.drawable.bg_item_quiz)
+        binding.quizGame.viewAnswerRight.root.setBackgroundResource(R.drawable.bg_item_quiz)
+
         viewLeft.translationX = 0f
         viewLeft.translationY = 0f
         viewLeft.rotation = 0f
@@ -292,10 +342,8 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
         if (isAnswering) return
 
         if (eulerZ > tiltThreshold * 3) {
-            // Nghiêng mạnh sang phải -> Chọn đáp án phải
             handleChoice(false, viewLeft, viewRight)
         } else if (eulerZ < -tiltThreshold * 3) {
-            // Nghiêng mạnh sang trái -> Chọn đáp án trái
             handleChoice(true, viewLeft, viewRight)
         } else if (eulerZ > tiltThreshold) {
             handleRightBeforeStart(eulerZ, viewLeft, viewRight)
@@ -310,26 +358,17 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
         isAnswering = true
         viewLifecycleOwner.lifecycleScope.launch {
             if (isLeft) {
-                // Animation cho bên trái
-                viewLeft.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
-                delay(500)
-                viewLeft.animate().scaleX(1f).scaleY(1f).setDuration(200).start()
+                if (questions[currentQuestionIndex].trueSide == 0) {
+                    binding.quizGame.viewAnswerLeft.root.setBackgroundResource(R.drawable.bg_item_quiz_correct)
+                    ++score
+                }
+                else binding.quizGame.viewAnswerLeft.root.setBackgroundResource(R.drawable.bg_item_quiz_in_correct)
             } else {
-                // Animation cho bên phải
-                viewRight.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start()
-                delay(500)
-                viewRight.animate().scaleX(1f).scaleY(1f).setDuration(200).start()
-            }
-
-            currentQuestionIndex++
-            if (currentQuestionIndex < questions.size) {
-                updateQuestion()
-                resetViews(viewLeft, viewRight)
-                delay(500)
-                isAnswering = false
-            } else {
-                // Hết câu hỏi
-                stopRecording()
+                if (questions[currentQuestionIndex].trueSide == 1) {
+                    binding.quizGame.viewAnswerRight.root.setBackgroundResource(R.drawable.bg_item_quiz_correct)
+                    ++score
+                }
+                else binding.quizGame.viewAnswerRight.root.setBackgroundResource(R.drawable.bg_item_quiz_in_correct)
             }
         }
     }
@@ -353,29 +392,43 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
 //
 //    }
 
-    private var smoothRightRotation = 0f
-    private var smoothRightTransX = 0f
-    private var smoothRightTransY = 0f
     private fun handleRightBeforeStart(rotation: Float, viewLeft: View, viewRight: View) {
-        viewRight.rotation = rotation
-        viewRight.translationX = rotation/90f * resources.getDimensionPixelSize(R.dimen._200sdp)
-        viewRight.translationY = rotation/90f * resources.getDimensionPixelSize(R.dimen._100sdp)
+//        val targetRotation = rotation * 1.25f
+//        val targetTransX = DimenExt.getDpf(rotation) * 2.22f
+//        val targetTransY = DimenExt.getDpf(rotation) * 2.0f
+//
+//        // Áp dụng thẳng vào View
+//        viewRight.rotation = targetRotation
+//        viewRight.translationX = targetTransX
+//        viewRight.translationY = targetTransY
+
+        val alpha = 0.8f
+        currentRightRotation += alpha * ((rotation / 0.8f) - currentRightRotation)
+        currentRightTranslationX += alpha * ((DimenExt.getDpf(rotation) / 0.45f) - currentRightTranslationX)
+        currentRightTranslationY += alpha * ((DimenExt.getDpf(rotation) / 0.5f) - currentRightTranslationY)
+        viewRight.rotation = currentRightRotation
+        viewRight.translationX = currentRightTranslationX
+        viewRight.translationY = currentRightTranslationY
+
+        // Reset View Right
+        viewLeft.rotation = 0f
         viewLeft.translationX = 0f
         viewLeft.translationY = 0f
-        viewLeft.rotation = 0f
+
+//        viewRight.rotation = rotation
+//        viewRight.translationX = rotation/90f * resources.getDimensionPixelSize(R.dimen._200sdp)
+//        viewRight.translationY = rotation/90f * resources.getDimensionPixelSize(R.dimen._100sdp)
+//        viewLeft.translationX = 0f
+//        viewLeft.translationY = 0f
+//        viewLeft.rotation = 0f
+
+        if (rotation>15f && isStartGame && !isAnswering){
+            handleChoice(false, viewLeft, viewRight)
+        }
     }
 
     private fun handleLeftBeforeStart(rotation: Float, viewLeft: View, viewRight: View) {
-        viewLeft.rotation = rotation
-        viewLeft.translationX = rotation/90f * resources.getDimensionPixelSize(R.dimen._200sdp)
-        viewLeft.translationY = -rotation/90f * resources.getDimensionPixelSize(R.dimen._100sdp)
-        viewRight.translationX = 0f
-        viewRight.translationY = 0f
-        viewRight.rotation = 0f
-    }
-
-//    private fun handleLeftBeforeStart(rotation: Float, viewLeft: View, viewRight: View) {
-//        // Khuếch đại biên độ trực tiếp, không dùng nội suy (alpha)
+        // Khuếch đại biên độ trực tiếp, không dùng nội suy (alpha)
 //        val targetRotation = rotation * 1.25f
 //        val targetTransX = DimenExt.getDpf(rotation) * 2.22f
 //        val targetTransY = -DimenExt.getDpf(rotation) * 2.0f
@@ -384,12 +437,55 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
 //        viewLeft.rotation = targetRotation
 //        viewLeft.translationX = targetTransX
 //        viewLeft.translationY = targetTransY
-//
-//        // Reset View Right
-//        viewRight.rotation = 0f
+
+        val alpha = 0.8f
+        currentLeftRotation += alpha * ((rotation / 0.8f) - currentLeftRotation)
+        currentLeftTranslationX += alpha * ((DimenExt.getDpf(rotation) / 0.45f) - currentLeftTranslationX)
+        currentLeftTranslationY += alpha * ((-DimenExt.getDpf(rotation) / 0.5f) - currentLeftTranslationY)
+        viewLeft.rotation = currentLeftRotation
+        viewLeft.translationX = currentLeftTranslationX
+        viewLeft.translationY = currentLeftTranslationY
+
+        // Reset View Right
+        viewRight.rotation = 0f
+        viewRight.translationX = 0f
+        viewRight.translationY = 0f
+
+//        viewLeft.rotation = rotation
+//        viewLeft.translationX = rotation/90f * resources.getDimensionPixelSize(R.dimen._200sdp)
+//        viewLeft.translationY = -rotation/90f * resources.getDimensionPixelSize(R.dimen._100sdp)
 //        viewRight.translationX = 0f
 //        viewRight.translationY = 0f
-//    }
+//        viewRight.rotation = 0f
+
+        if (rotation<-15f && isStartGame && !isAnswering){
+            handleChoice(true, viewLeft, viewRight)
+        }
+    }
+
+    private fun nextQuestion(viewLeft: View, viewRight: View) {
+        currentQuestionIndex++
+
+        if (currentQuestionIndex < questions.size) {
+            updateQuestion()
+            // Gọi resetViews để đưa UI về giữa và mở khóa isAnswering = false
+            resetViews(viewLeft, viewRight)
+        } else {
+            binding.quizGame.root.hide()
+
+            binding.bgScore.show()
+            binding.tvScore.show()
+
+            val scoreText = (score.toFloat() / questions.size * 100).toInt()
+            binding.tvScore.text = "$scoreText"
+
+            // Kết thúc game
+            isStartGame = false
+            isAnswering = false
+        }
+    }
+
+
 
 //    private fun handleLeftBeforeStart(rotation: Float, viewLeft: View, viewRight: View) {
 //        val alpha = 0.8f

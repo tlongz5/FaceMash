@@ -5,8 +5,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentSplashBinding
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.PreferenceUtils
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.PreferenceUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds

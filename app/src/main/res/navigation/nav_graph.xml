@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/videoPreviewFragment"
-        android:name="com.example.magicface.view.VideoPreviewFragment"
+        android:name="com.example.facemash.view.VideoPreviewFragment"
         android:label="VideoPreviewFragment" />
     <fragment
         android:id="@+id/songPickerFragment"
@@ -61,5 +61,9 @@
         android:name="com.example.facemash.view.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.facemash.view.detail.DetailFragment"
+        android:label="DetailFragment" />
 
 </navigation>

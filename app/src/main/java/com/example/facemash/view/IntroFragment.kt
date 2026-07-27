@@ -3,9 +3,9 @@ package com.example.facemash.view
 import androidx.viewpager2.widget.ViewPager2
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentIntroBinding
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.PreferenceUtils
-import com.example.magicface.utils.setSingleClick
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.PreferenceUtils
+import com.example.facemash.utils.setSingleClick
 
 class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::inflate) {
     private val introAdapter = IntroAdapter()

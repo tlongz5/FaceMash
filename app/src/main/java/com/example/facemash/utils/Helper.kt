@@ -1,8 +1,8 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import com.example.facemash.R
-import com.example.magicface.model.IntroPager
-import com.example.magicface.model.LanguageModel
+import com.example.facemash.model.IntroPager
+import com.example.facemash.model.LanguageModel
 
 object Helper {
     val introList = listOf(

@@ -44,4 +44,21 @@
         app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
         app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/img_above" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_tag" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

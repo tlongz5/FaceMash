@@ -25,6 +25,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_drawOnPreview="true"
+            app:layout_drawOnVideoSnapshot="true"
             android:clipChildren="false"
             android:clipToPadding="false">
 
@@ -78,7 +80,8 @@
 
     <LinearLayout
         android:id="@+id/btn_music"
-        android:layout_width="@dimen/_150sdp"
+        android:layout_width="wrap_content"
+        android:maxWidth="@dimen/_200sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_music_gradient"
         android:gravity="center_vertical"

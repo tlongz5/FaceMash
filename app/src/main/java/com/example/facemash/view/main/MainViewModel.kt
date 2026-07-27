@@ -1,6 +1,7 @@
 package com.example.facemash.view.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,17 +9,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.baseproject.model.MusicData
 import com.example.facemash.R
 import com.example.facemash.view.LocalRepo
-import com.example.magicface.model.Game
-import com.example.magicface.model.TrendingData
-import com.example.magicface.utils.getJsonFromRaw
+import com.example.facemash.model.Game
+import com.example.facemash.model.TrendingData
+import com.example.facemash.utils.getImagesFromAsset
+import com.example.facemash.utils.getJsonFromRaw
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val localRepo: LocalRepo
+    private val localRepo: LocalRepo,
+    @ApplicationContext private val context: Context
 ): ViewModel() {
     val game = listOf(
         R.drawable.img_ranking to "Ranking",
@@ -26,6 +30,15 @@ class MainViewModel @Inject constructor(
         R.drawable.img_lip_poses to "Lip Pose",
         R.drawable.img_princess_or_witch to "Princess Or Witch"
     )
+
+    val ranking = getImagesFromAsset(context)
+    val firstElementsList: List<String> = ranking.mapNotNull { subList ->
+        subList.firstOrNull()
+    }
+
+    val multipliedList = List(10) { firstElementsList }.flatten()
+
+
 
     private val _gamesData = MutableLiveData<List<Game>>()
     val gamesData: LiveData<List<Game>> get() = _gamesData

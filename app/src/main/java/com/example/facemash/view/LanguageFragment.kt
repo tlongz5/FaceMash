@@ -5,9 +5,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentLanguageBinding
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.Helper
-import com.example.magicface.utils.setSingleClick
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.Helper
+import com.example.facemash.utils.setSingleClick
 
 class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageBinding::inflate) {
     private lateinit var languageAdapter: LanguageAdapter

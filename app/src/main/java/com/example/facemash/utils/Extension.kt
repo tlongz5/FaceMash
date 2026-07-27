@@ -1,13 +1,15 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RawRes
 import androidx.fragment.app.Fragment
@@ -71,6 +73,41 @@ fun playMusic(music: MusicData){
         }
     }catch (e: Exception){
         e.printStackTrace()
+    }
+}
+
+fun getImagesFromAsset(context: Context): List<List<String>> {
+    val imagePaths = mutableListOf<MutableList<String>>()
+    try {
+        // Lấy tất cả tên file trong thư mục "ranking" của assets
+        val files = context.assets.list("ranking")
+        if (files != null) {
+            var imageList = mutableListOf<String>()
+            for (fileName in files) {
+                if (imageList.size==10) {
+                    imagePaths.add(imageList)
+                    imageList = mutableListOf()
+                }
+                // Lưu lại đường dẫn đầy đủ để dùng cho hàm open() ở trên
+                val filePath = "ranking/$fileName"
+                imageList.add(filePath)
+            }
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    return imagePaths
+}
+
+fun setAssetImageToDrawable(context: Context, fileName: String): Drawable? {
+    return try {
+        val inputStream = context.assets.open(fileName)
+        val drawable = Drawable.createFromStream(inputStream, null)
+        inputStream.close()
+        drawable
+    } catch (e: IOException) {
+        e.printStackTrace()
+        null
     }
 }
 

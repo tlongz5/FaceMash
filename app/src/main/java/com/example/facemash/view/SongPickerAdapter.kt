@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.baseproject.model.MusicData
 import com.example.facemash.R
 import com.example.facemash.databinding.ItemSongPickerBinding
-import com.example.magicface.utils.hide
+import com.example.facemash.utils.hide
 
 class SongPickerAdapter(
     private val onClickItem: (MusicData) -> Unit

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.facemash.databinding.ItemMoreGameBinding
-import com.example.magicface.model.Game
+import com.example.facemash.model.Game
 
 class MoreGameAdapter(private val onClick: (Pair<Int, String>) -> Unit) :
     ListAdapter<Pair<Int, String>, MoreGameAdapter.MoreGameViewHolder>(DiffCallback()) {

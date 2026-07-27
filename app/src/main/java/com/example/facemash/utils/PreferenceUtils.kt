@@ -1,11 +1,11 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 
 object PreferenceUtils {
     var sharePreferences : SharedPreferences? = null
-    const val PREF_KEY = "MAGIC_FACE"
+    const val PREF_KEY = "FACE_MASH"
 
     fun init(context: Context) {
         sharePreferences = context.applicationContext.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)

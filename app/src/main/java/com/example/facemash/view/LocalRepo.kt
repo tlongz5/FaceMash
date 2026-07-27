@@ -2,8 +2,8 @@ package com.example.facemash.view
 
 import android.content.Context
 import com.example.facemash.R
-import com.example.magicface.model.TrendingData
-import com.example.magicface.utils.getJsonFromRaw
+import com.example.facemash.model.TrendingData
+import com.example.facemash.utils.getJsonFromRaw
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject

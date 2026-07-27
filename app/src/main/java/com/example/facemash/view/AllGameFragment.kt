@@ -4,8 +4,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentAllGameBinding
 import com.example.facemash.view.main.MainViewModel
-import com.example.magicface.base.BaseFragment
-import com.example.magicface.utils.setSingleClick
+import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.setSingleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +23,14 @@ class AllGameFragment : BaseFragment<FragmentAllGameBinding>(FragmentAllGameBind
         btnThisOrThat.setSingleClick {
             viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
             navigateTo(R.id.thisOrThatFragment)
+        }
+        btnRanking.setSingleClick {
+            viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+            navigateTo(R.id.rankingFragment)
+        }
+        btnPrincessOrWitch.setSingleClick {
+            viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+            navigateTo(R.id.princessOrWitchFragment)
         }
         btnSetting.setSingleClick {
             navigateTo(R.id.settingFragment)

@@ -1,7 +1,7 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import com.example.facemash.R
-import com.example.magicface.model.LanguageModel
+import com.example.facemash.model.LanguageModel
 
 object Constants {
     const val LANGUAGE_KEY = "LANGUAGE_KEY"
@@ -50,6 +50,30 @@ object Constants {
         FilterType.MATH,
         FilterType.SONG
     )
+
+    val rankingType = listOf(
+        "Social",
+        "Beauty",
+        "Food",
+        "Female",
+        "Eye",
+        "Nail",
+        "Bug",
+        "Polite Hug",
+        "Brand",
+        "Kiss",
+        "Lips",
+        "Snacks",
+        "Dog",
+        "Housing",
+        "Car",
+        "Hand Bag",
+        "Football",
+        "Action",
+        "Woman"
+    )
+
+    val rankingTypeMultiList = List(10){rankingType}.flatten()
 
 
 }

@@ -88,8 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -155,9 +154,8 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/view1"
             android:padding="@dimen/_14sdp"
-            app:layout_constraintTop_toTopOf="@id/view3">
+            app:layout_constraintTop_toBottomOf="@+id/view3">
 
             <ImageView
                 android:layout_width="@dimen/_22sdp"
@@ -182,19 +180,80 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
-        android:text="Term \\ Privacy"
+        android:text="Term &amp; Privacy"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
-
         app:gradientEndColor="@color/white"
         app:gradientStartColor="@color/white"
         app:strokeWidth="1dp"
         app:strokeColor="@color/black"
-
         android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_6sdp"
         app:layout_constraintStart_toStartOf="@+id/btn_back"
         app:layout_constraintTop_toBottomOf="@+id/constraint_1" />
 
+    <!-- ĐÂY LÀ PHẦN BẠN CÒN THIẾU -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_setting"
+        app:layout_constraintTop_toBottomOf="@+id/term"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_18sdp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_14sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:gravity="center"
+                android:src="@drawable/ic_term" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/grandstander_semibold"
+                android:gravity="center"
+                android:text="Term &amp; Conditions"
+                android:textColor="#2D3E5A" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+            android:padding="@dimen/_14sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:gravity="center"
+                android:src="@drawable/ic_policy" /> <!-- Nhớ thay đổi tên icon nếu file drawable của bạn khác -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/grandstander_semibold"
+                android:gravity="center"
+                android:text="Privacy Policy"
+                android:textColor="#2D3E5A" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

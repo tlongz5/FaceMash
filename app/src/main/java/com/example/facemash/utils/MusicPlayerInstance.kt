@@ -1,4 +1,4 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import android.content.Context
 import androidx.media3.common.MediaItem

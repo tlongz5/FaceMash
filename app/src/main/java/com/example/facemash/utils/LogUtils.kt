@@ -1,4 +1,4 @@
-package com.example.magicface.utils
+package com.example.facemash.utils
 
 import android.util.Log
 

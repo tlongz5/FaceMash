@@ -1,4 +1,4 @@
-package com.example.magicface.model
+package com.example.facemash.model
 
 data class TrendingData(
     val id: String? = null,
