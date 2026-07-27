@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.intro
 
 import androidx.viewpager2.widget.ViewPager2
 import com.example.facemash.R

@@ -26,8 +26,7 @@ class HomeTrendingFilterAdapter(
     ) {
         val trendingData = getItem(position)
         with(viewHolder.binding) {
-            tvType.text = trendingData.hasTag
-            tvHeartCount.text = trendingData.heartCount
+            tvViewCount.text = trendingData.heartCount
             Glide.with(root.context)
                 .load(trendingData.image)
                 .into(imgThumb)

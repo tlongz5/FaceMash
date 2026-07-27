@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.songpicker
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.language
 
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat

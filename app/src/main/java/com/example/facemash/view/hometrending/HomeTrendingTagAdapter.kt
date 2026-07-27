@@ -25,19 +25,26 @@ class HomeTrendingTagAdapter(
     ) {
         val tag = tags[position]
         if (position == positionSelected) {
-            viewHolder.binding.btnTag.setBackgroundColor(viewHolder.binding.root.context.getColor(R.color.white))
+            viewHolder.binding.btnTag.setBackgroundResource(R.drawable.bg_tv_tag_home_trending_selected)
             viewHolder.binding.btnTag.setTextColor(viewHolder.binding.root.context.getColor(R.color.tv_tag_selected))
         }else{
-            viewHolder.binding.btnTag.setBackgroundColor(viewHolder.binding.root.context.getColor(R.color.bg_tag))
+            viewHolder.binding.btnTag.setBackgroundResource(R.drawable.bg_tv_tag_home_trending_unselected)
             viewHolder.binding.btnTag.setTextColor(viewHolder.binding.root.context.getColor(R.color.white))
         }
-        viewHolder.binding.btnTag.text = tag
+        viewHolder.binding.btnTag.text = tag.replaceFirstChar { it.uppercase() }
         viewHolder.binding.btnTag.setOnClickListener {
-            onTagClick(position)
             val curPosition = viewHolder.bindingAdapterPosition
-            positionSelected = curPosition
-            notifyDataSetChanged()
+            if (curPosition != RecyclerView.NO_POSITION) {
+                onTagClick(curPosition)
+                positionSelected = curPosition
+                notifyDataSetChanged()
+            }
         }
+    }
+
+    fun updateSelection(position: Int) {
+        positionSelected = position
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

@@ -118,7 +118,9 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
     }
 
     override fun FragmentDetailBinding.initListener() {
-
+        btnBack.setOnClickListener {
+            navigateUp()
+        }
     }
 
     override fun initObserver() {

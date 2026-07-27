@@ -25,7 +25,7 @@ class DetailAdapter(
         position: Int
     ) {
         holder.binding.tvTag.text = videoList[position].hasTag
-        holder.binding.btnPlay.setOnClickListener {
+        holder.binding.btnCreate.setOnClickListener {
             callbackOnClickPlay(videoList[position])
         }
     }

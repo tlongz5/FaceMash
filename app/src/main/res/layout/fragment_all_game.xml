@@ -111,6 +111,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:src="@drawable/img_princess_or_witch"
         app:layout_constraintDimensionRatio="154:152"
         app:layout_constraintEnd_toStartOf="@id/btn_ranking"

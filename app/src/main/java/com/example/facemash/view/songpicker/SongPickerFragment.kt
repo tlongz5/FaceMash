@@ -1,4 +1,4 @@
-package com.example.facemash.view
+package com.example.facemash.view.songpicker
 
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController

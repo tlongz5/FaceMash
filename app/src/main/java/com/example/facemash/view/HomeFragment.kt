@@ -25,6 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             }
         }
+        viewPager.isUserInputEnabled = false
 
         viewPager.setCurrentItem(1, false)
         updateTab(1)

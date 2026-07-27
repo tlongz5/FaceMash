@@ -1,13 +1,10 @@
-package com.example.facemash.view
+package com.example.facemash.view.ranking
 
-import android.graphics.drawable.Drawable
-import androidx.recyclerview.widget.DiffUtil
 import com.example.facemash.base.BaseDiffCallBack
 import com.example.facemash.base.BaseListAdapter
 import com.example.facemash.databinding.ItemRankingBinding
 import com.example.facemash.utils.Constants
 import com.example.facemash.utils.setAssetImageToDrawable
-import java.io.IOException
 
 class RankingAdapter(
     private val onItemClick: (String, Int) -> Unit

@@ -17,10 +17,11 @@ class HomeTrendingFragment : BaseFragment<FragmentHomeTrendingBinding>(FragmentH
             navigateTo(resId = R.id.settingFragment)
         }
 
-        rcvTag.adapter = HomeTrendingTagAdapter(Constants.filterType) { position ->
+        val tagAdapter = HomeTrendingTagAdapter(Constants.filterType) { position ->
             viewPager.currentItem = position
             logd("position $position")
         }
+        rcvTag.adapter = tagAdapter
 
         rcvTag.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -33,6 +34,14 @@ class HomeTrendingFragment : BaseFragment<FragmentHomeTrendingBinding>(FragmentH
                 return FilterPageFragment.newInstance(Constants.filterType[position])
             }
         }
+
+        viewPager.registerOnPageChangeCallback(object : androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tagAdapter.updateSelection(position)
+                rcvTag.smoothScrollToPosition(position)
+            }
+        })
 
         viewPager.currentItem = 0
     }

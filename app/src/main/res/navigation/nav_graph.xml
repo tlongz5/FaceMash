@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/languageFragment"
-        android:name="com.example.facemash.view.LanguageFragment"
+        android:name="com.example.facemash.view.language.LanguageFragment"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
     <fragment
@@ -16,7 +16,7 @@
         android:label="SplashFragment" />
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.facemash.view.IntroFragment"
+        android:name="com.example.facemash.view.intro.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" />
     <fragment
@@ -44,7 +44,7 @@
         android:label="VideoPreviewFragment" />
     <fragment
         android:id="@+id/songPickerFragment"
-        android:name="com.example.facemash.view.SongPickerFragment"
+        android:name="com.example.facemash.view.songpicker.SongPickerFragment"
         android:label="SongPickerFragment" />
     <fragment
         android:id="@+id/myDownloadFragment"
@@ -58,7 +58,7 @@
         tools:layout="@layout/fragment_princess_or_witch" />
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="com.example.facemash.view.RankingFragment"
+        android:name="com.example.facemash.view.ranking.RankingFragment"
         android:label="fragment_ranking"
         tools:layout="@layout/fragment_ranking" />
     <fragment

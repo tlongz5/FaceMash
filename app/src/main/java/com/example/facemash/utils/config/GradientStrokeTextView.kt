@@ -11,6 +11,7 @@ import android.graphics.Shader
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import com.example.facemash.R // Đảm bảo import đúng R của project
+import kotlin.math.roundToInt
 
 class GradientStrokeTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -27,7 +28,20 @@ class GradientStrokeTextView @JvmOverloads constructor(
     private var customShadowDx: Float = 0f
     private var customShadowDy: Float = 0f
 
+    private fun dp(value: Float): Int {
+        return (value * resources.displayMetrics.density).roundToInt()
+    }
+
     init {
+        val extraPadding = dp(2f)
+
+        setPadding(
+            paddingLeft + extraPadding,
+            paddingTop + extraPadding,
+            paddingRight + extraPadding,
+            paddingBottom + extraPadding
+        )
+
         originalTextColor = textColors
         attrs?.let {
             val a = context.obtainStyledAttributes(it, R.styleable.GradientStrokeTextView)
