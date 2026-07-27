@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 1. Lớp dưới cùng / Ngoài cùng: Nền gradient -->
+    <item android:top="0dp" android:left="0dp" android:right="0dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp"/>
+            <gradient
+                android:startColor="@color/primary_light"
+                android:endColor="@color/primary"
+                android:angle="45"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- 2. Lớp ở giữa: Lớp màu xám thụt vào 3dp từ mọi phía so với lớp gradient -->
+    <item android:top="3dp" android:left="3dp" android:right="3dp" android:bottom="3dp">
+        <shape android:shape="rectangle">
+            <!-- Lưu ý: Khi bóp nhỏ lại, bo góc có thể giảm đi 1-2dp để các viền trông đều và mượt hơn -->
+            <corners android:radius="22dp"/>
+            <solid android:color="#E0E0E0"/> <!-- Thay bằng màu xám bạn muốn -->
+        </shape>
+    </item>
+
+    <!-- 3. Lớp trên cùng: Lớp màu trắng, riêng cạnh đáy thụt thêm 3dp so với lớp xám (thành 6dp) -->
+    <item android:top="3dp" android:left="3dp" android:right="3dp" android:bottom="7dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="22dp"/>
+            <solid android:color="#FFFFFF"/> <!-- Màu trắng của thẻ chính -->
+        </shape>
+    </item>
+
+</layer-list>

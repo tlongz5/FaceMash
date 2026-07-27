@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(
     fun getGamesData(context: Context) {
         getJsonFromRaw(context, R.raw.games_data)?.let { list ->
             val listGames = Gson().fromJson(list, Array<Game>::class.java).toList()
-            _gamesData.value = listGames.filter { it.type == "Text" }
+            _gamesData.value = listGames
         }
     }
 

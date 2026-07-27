@@ -111,10 +111,11 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     }
 
     override fun initObserver() {
+        val category = arguments?.getString("category") ?: "Music"
         viewModel.gamesData.observe(viewLifecycleOwner){ games ->
-            val listGame = games.filter { it.type == "Text" }
+            val listGame = games.filter { it.category == category }
             if (listGame.isNotEmpty()) {
-                questions = listGame[0].questions
+                questions = listGame.random().questions
                 currentQuestionIndex = 0
                 updateQuestion()
             }

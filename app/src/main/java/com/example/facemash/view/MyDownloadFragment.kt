@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.MediaStore
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -45,10 +46,24 @@ class MyDownloadFragment : BaseFragment<FragmentMyDownloadBinding>(FragmentMyDow
 
         moreGameAdapter = MoreGameAdapter { game ->
             when(game.second){
-                "Ranking" -> {navigateTo(R.id.rankingFragment)}
-                "This Or That" -> {navigateTo(R.id.thisOrThatFragment)}
-                "Lip Pose" -> {navigateTo(R.id.lipPoseFragment)}
-                "Princess Or Witch" -> {navigateTo(R.id.princessOrWitchFragment)}
+                "Ranking" -> {
+                    viewModel.dataMusicFromAssets.value?.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+                    navigateTo(R.id.rankingFragment)
+                }
+                "This Or That" -> {
+                    viewModel.dataMusicFromAssets.value?.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+                    navigateTo(R.id.thisOrThatFragment, Bundle().apply {
+                        putString("category", "Math")
+                    })
+                }
+                "Lip Pose" -> {
+                    viewModel.dataMusicFromAssets.value!!.find { it.name == "Lip Puzzle" }?.let { viewModel.setSelectedMusic(it) }
+                    navigateTo(R.id.lipPoseFragment)
+                }
+                "Princess Or Witch" -> {
+                    viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+                    navigateTo(R.id.princessOrWitchFragment)
+                }
             }
         }
         rvMoreGames.adapter = moreGameAdapter
