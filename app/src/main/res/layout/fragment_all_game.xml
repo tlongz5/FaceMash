@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
-        android:text="Lip Pose"
+        android:text="@string/lip_pose"
 
         app:shadowColor="#000000"
         app:shadowDy="2dp"
@@ -98,7 +98,7 @@
         app:shadowDy="2dp"
         app:strokeColor="@color/black"
         app:strokeWidth="1.5dp"
-        android:text="This or That"
+        android:text="@string/this_or_that"
 
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
@@ -125,7 +125,7 @@
         android:fontFamily="@font/grandstander_extrabold"
         android:textStyle="bold"
 
-        android:text="Princess or Witch"
+        android:text="@string/princess_or_witch"
 
         app:shadowColor="#000000"
         app:shadowDy="2dp"
@@ -155,7 +155,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
         android:shadowColor="#000000"
-        android:text="Ranking"
+        android:text="@string/ranking"
 
         app:shadowColor="#000000"
         app:shadowDy="2dp"

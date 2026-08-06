@@ -33,16 +33,25 @@
         app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
         app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"/>
 
-    <ImageView
-        android:id="@+id/bg_all_game"
-        android:layout_width="@dimen/_140sdp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="154:24"
-        android:src="@drawable/tv_trending_selected"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <com.example.facemash.utils.config.GradientStrokeTextView
+        android:id="@+id/tv_trending_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/grandstander_extrabold"
+        android:gravity="center"
+        android:text="@string/trending"
+        app:gradientEndColor="#F6B454"
+        app:gradientStartColor="#FEE902"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_24ssp"
         app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
-        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"
+        app:shadowColor="#000000"
+        app:shadowDy="2dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1.5dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_tag"

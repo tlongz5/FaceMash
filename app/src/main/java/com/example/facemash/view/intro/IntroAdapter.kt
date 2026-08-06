@@ -21,8 +21,8 @@ class IntroAdapter : RecyclerView.Adapter<IntroAdapter.IntroViewHolder>() {
     ) {
         with(holder.binding) {
             viewPager.setImageResource(introList[position].image)
-            tvName.text = introList[position].name
-            tvDes.text = introList[position].des
+            tvName.setText(introList[position].name)
+            tvDes.setText(introList[position].des)
         }
     }
 

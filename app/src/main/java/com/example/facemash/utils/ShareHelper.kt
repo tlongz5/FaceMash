@@ -3,16 +3,17 @@ package com.example.facemash.utils
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.FileProvider
+import com.example.facemash.BuildConfig
 import com.example.facemash.R
 import java.io.File
 
-object ShareHelper {
-    fun shareFiles(context: Context, files: List<File>) {
+class ShareHelper(private val context: Context) {
+    fun shareFiles(files: List<File>) {
         try {
             val videoUris = files.map { file ->
                 FileProvider.getUriForFile(
                     context,
-                    "${context.packageName}.fileprovider",
+                    BuildConfig.CONTENT_PROVIDER_AUTHORITY,
                     file
                 )
             }
@@ -32,7 +33,7 @@ object ShareHelper {
         }
     }
 
-    fun shareApp(context: Context) {
+    fun shareApp() {
         try {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"

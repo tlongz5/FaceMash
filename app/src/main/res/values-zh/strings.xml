@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">语言</string>
+    <string name="next">下一步</string>
+    <string name="done">完成</string>
+    <string name="trending">热门</string>
+    <string name="all_game">所有游戏</string>
+    <string name="record">记录</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="rate_us">在 App Store 上评价我们</string>
+    <string name="share_app">分享此应用</string>
+    <string name="send_feedback">发送反馈</string>
+    <string name="term_privacy">条款与隐私</string>
+    <string name="term_conditions">条款和条件</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="exit_title">退出？</string>
+    <string name="exit_msg">您确定要退出而不保存吗？</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="add_sound">添加声音</string>
+    <string name="no_sound">无声</string>
+    <string name="sound_title">声音</string>
+    <string name="lip_pose">嘴唇姿势</string>
+    <string name="this_or_that">这个或那个</string>
+    <string name="princess_or_witch">公主或女巫</string>
+    <string name="ranking">排名</string>
+    <string name="intro_des_1">为你喜欢的发色评分。\n 什么是热门，什么不是</string>
+    <string name="intro_title_2">混合你的心情</string>
+    <string name="intro_des_2">立即创建搞笑的最爱混搭。</string>
+    <string name="intro_title_3">滤镜融合乐趣</string>
+    <string name="intro_des_3">用疯狂的滤镜挑战你的创意！</string>
+    <string name="create_challenge_now">立即创建挑战</string>
+    <string name="save_success">保存成功</string>
+    <string name="txt_share">分享</string>
+    <string name="txt_download">下载</string>
+</resources>

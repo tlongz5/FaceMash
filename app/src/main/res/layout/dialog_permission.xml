@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog2"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/tvTitle"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:fontFamily="@font/grandstander_extrabold"
+            android:text="Exit?"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:src="@drawable/ic_open_setting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shadowColor="#000000"
+            app:shadowDy="2dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1.5dp" />
+
+        <com.example.facemash.utils.config.GradientStrokeTextView
+            android:id="@+id/tvMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/grandstander_extrabold"
+            android:gravity="center"
+            android:text="@string/msg_title_audio_access"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:shadowColor="#000000"
+            app:shadowDy="2dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1.5dp" />
+
+        <com.example.facemash.utils.config.GradientStrokeTextView
+            android:id="@+id/tvDes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/grandstander_extrabold"
+            android:gravity="center"
+            android:text="@string/msg_description_audio_access"
+            android:textColor="@color/white"
+            android:maxLines="2"
+            android:textSize="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessage"
+            app:shadowColor="#000000"
+            app:shadowDy="2dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1dp" />
+
+        <ImageView
+            android:id="@+id/btn_later"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_later"
+            app:layout_constraintEnd_toStartOf="@+id/btnSetting"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDes" />
+
+        <ImageView
+            android:id="@+id/btnSetting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_go_to_setting"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_later"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_later"
+            app:layout_constraintTop_toTopOf="@+id/btn_later" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

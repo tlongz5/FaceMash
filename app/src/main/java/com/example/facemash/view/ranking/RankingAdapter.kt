@@ -16,6 +16,7 @@ class RankingAdapter(
 
     override fun onBind(binding: ItemRankingBinding, item: String, position: Int) {
         binding.tvGameName.text = Constants.rankingTypeMultiList[position]
+        binding.tvGameName.isSelected = true
         binding.imgGameAvatar.setImageDrawable(setAssetImageToDrawable(binding.root.context,item))
     }
 }

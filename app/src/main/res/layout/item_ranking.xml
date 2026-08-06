@@ -24,15 +24,20 @@
 
     <TextView
         android:id="@+id/tv_game_name"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_55sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_4sdp"
-        android:text="Game 1"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_10ssp"
+        android:ellipsize="marquee"
         android:fontFamily="@font/grandstander_extrabold"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
         android:shadowColor="#80000000"
         android:shadowDx="1"
         android:shadowDy="1"
-        android:shadowRadius="2" />
+        android:shadowRadius="2"
+        android:singleLine="true"
+        android:text="Game 1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp" />
 </LinearLayout>

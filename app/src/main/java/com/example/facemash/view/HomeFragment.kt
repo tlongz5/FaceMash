@@ -1,18 +1,62 @@
 package com.example.facemash.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.facemash.R
+import com.example.facemash.databinding.DialogExitBinding
 import com.example.facemash.databinding.FragmentHomeBinding
 import com.example.facemash.view.hometrending.HomeTrendingFragment
 import com.example.facemash.base.BaseFragment
 import com.example.facemash.utils.setScaleDown
 import com.example.facemash.utils.setScaleUp
 import com.example.facemash.utils.setSingleClick
+import androidx.core.graphics.drawable.toDrawable
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitDialog()
+            }
+        })
+    }
+
+    private fun showExitDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val dialogBinding = DialogExitBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
+
+        dialogBinding.btnCancel.setSingleClick {
+            dialog.dismiss()
+        }
+
+        dialogBinding.btnOk.setSingleClick {
+            dialog.dismiss()
+            requireActivity().finish()
+        }
+
+        val width = (resources.displayMetrics.widthPixels * 0.80).toInt()
+
+        // Set lại thông số cho Window của Dialog
+        dialog.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialog.show()
+    }
+
     override fun FragmentHomeBinding.initView() {
         viewPager.adapter = object : FragmentStateAdapter(this@HomeFragment) {
             override fun getItemCount() = 3

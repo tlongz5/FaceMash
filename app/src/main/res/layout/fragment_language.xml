@@ -49,4 +49,10 @@
         app:spanCount="2"
         tools:layout_editor_absoluteX="10dp"
         tools:listitem="@layout/item_language" />
+
+    <FrameLayout
+        android:id="@+id/adCollapsibleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

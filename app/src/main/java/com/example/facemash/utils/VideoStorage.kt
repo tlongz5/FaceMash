@@ -6,7 +6,7 @@ import java.io.File
 
 object VideoStorage {
 
-    private const val VIDEO_FOLDER = "FilterQuiz"
+    private val VIDEO_FOLDER = Constants.GAME_RECORD_FOLDER
 
     fun getVideoDirectory(context: Context): File? {
         val moviesDirectory =

@@ -25,6 +25,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/bg_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="412:63" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_trending"
@@ -67,7 +74,7 @@
             android:layout_marginBottom="@dimen/_10ssp"
             android:fontFamily="@font/grandstander_extrabold"
             android:gravity="center"
-            android:text="Trending"
+            android:text="@string/trending"
             android:paddingHorizontal="@dimen/_2sdp"
 
             app:strokeWidth="1.5dp"
@@ -127,7 +134,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/grandstander_extrabold"
             android:gravity="center"
-            android:text="All Game"
+            android:text="@string/all_game"
             android:paddingHorizontal="@dimen/_2sdp"
 
             app:strokeWidth="1.5dp"
@@ -188,7 +195,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/grandstander_extrabold"
             android:gravity="center"
-            android:text="Record"
+            android:text="@string/record"
             android:paddingHorizontal="@dimen/_2sdp"
 
             app:strokeWidth="1.5dp"

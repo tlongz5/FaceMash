@@ -12,6 +12,7 @@ import com.example.facemash.R
 import com.example.facemash.databinding.FragmentMyDownloadBinding
 import com.example.facemash.view.main.MainViewModel
 import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.Constants
 import com.example.facemash.utils.PlayerInstance.play
 import com.example.facemash.utils.PlayerInstance.player
 import com.example.facemash.utils.PlayerInstance.stop
@@ -78,7 +79,7 @@ class MyDownloadFragment : BaseFragment<FragmentMyDownloadBinding>(FragmentMyDow
         }
         btnShare.setSingleClick {
             if (videoFile.exists()) {
-                ShareHelper.shareFiles(requireContext(), listOf(videoFile))
+                ShareHelper(requireContext()).shareFiles(listOf(videoFile))
             } else {
                 showToast(requireContext(), "File not found")
             }
@@ -107,7 +108,7 @@ class MyDownloadFragment : BaseFragment<FragmentMyDownloadBinding>(FragmentMyDow
         return try {
             val moviesDir = File(
                 android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_MOVIES),
-                "FaceMash"
+                Constants.GAME_RECORD_FOLDER
             )
             if (!moviesDir.exists() && !moviesDir.mkdirs()) {
                 return null
@@ -138,7 +139,7 @@ class MyDownloadFragment : BaseFragment<FragmentMyDownloadBinding>(FragmentMyDow
         val values = ContentValues().apply {
             put(MediaStore.Video.Media.DISPLAY_NAME, "video_${System.currentTimeMillis()}.mp4")
             put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/FaceMash")
+            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/${Constants.GAME_RECORD_FOLDER}")
             put(MediaStore.Video.Media.IS_PENDING, 1)
         }
 
@@ -162,6 +163,18 @@ class MyDownloadFragment : BaseFragment<FragmentMyDownloadBinding>(FragmentMyDow
             resolver.delete(videoUri, null, null)
             null
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::videoPath.isInitialized && videoPath.isNotEmpty()) {
+            play(videoPath)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        player?.pause()
     }
 
     override fun onDestroyView() {

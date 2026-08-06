@@ -4,5 +4,44 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="language">Language</string>
     <string name="next">Next</string>
-    <string name="add_sound">Add Sound\n</string>
+    <string name="done">Done</string>
+    <string name="trending">Trending</string>
+    <string name="all_game">All Game</string>
+    <string name="record">Record</string>
+    <string name="setting">Setting</string>
+    <string name="about">About</string>
+    <string name="rate_us">Rate us on App Store</string>
+    <string name="share_app">Share this App</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="term_privacy">Term &amp; Privacy</string>
+    <string name="term_conditions">Term &amp; Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="exit_title">Exit?</string>
+    <string name="exit_msg">Are you sure you want to exit without saving?</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string name="intro_title_1">Ranking Filter</string>
+    <string name="intro_des_1">Rate your fave hair colors.\n What’s hot or not</string>
+    <string name="intro_title_2">Mix Your Mood</string>
+    <string name="intro_des_2">Create hilarious fave mashups instantly.</string>
+    <string name="intro_title_3">Filter Fusion Fun</string>
+    <string name="intro_des_3">Challenge your creativity with crazy filters!</string>
+    <string name="add_sound">Add Sound</string>
+    <string name="message_email">Please tell us your opinion: </string>
+    <string name="subject_feedback">[Capybara Android] Feedback</string>
+    <string name="msg_title_audio_access">\"App\" wants Audio access</string>
+    <string name="msg_description_audio_access">Please go to Setting to enable Audio access</string>
+    <string name="lip_pose">Lip Pose</string>
+    <string name="this_or_that">This or That</string>
+    <string name="princess_or_witch">Princess or Witch</string>
+    <string name="ranking">Ranking</string>
+    <string name="no_sound">No Sound</string>
+    <string name="sound_title">Sound</string>
+    <string name="create_challenge_now">Create Challenge Now</string>
+    <string name="save_success">Save Successful</string>
+    <string name="txt_share">Share</string>
+    <string name="txt_download">Download</string>
 </resources>
+
+

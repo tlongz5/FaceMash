@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentVideoPreviewBinding
 import com.example.facemash.base.BaseFragment
+import com.example.facemash.utils.Constants
 import com.example.facemash.utils.PlayerInstance.pause
 import com.example.facemash.utils.PlayerInstance.play
 import com.example.facemash.utils.PlayerInstance.player
@@ -66,7 +67,7 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
         return try {
             val moviesDir = File(
                 requireContext().getExternalFilesDir(android.os.Environment.DIRECTORY_MOVIES),
-                "FaceMash"
+                Constants.GAME_RECORD_FOLDER
             )
             if (!moviesDir.exists() && !moviesDir.mkdirs()) {
                 return null
@@ -97,7 +98,7 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
         val values = ContentValues().apply {
             put(MediaStore.Video.Media.DISPLAY_NAME, videoFile.name)
             put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
-            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/FaceMash")
+            put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/${Constants.GAME_RECORD_FOLDER}")
 
             // Add more metadata if needed
             put(MediaStore.Video.Media.IS_PENDING, 1)
@@ -139,6 +140,13 @@ class VideoPreviewFragment : BaseFragment<FragmentVideoPreviewBinding>(FragmentV
 
     override fun initObserver() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::videoPath.isInitialized) {
+            play(videoPath)
+        }
     }
 
     override fun onPause() {

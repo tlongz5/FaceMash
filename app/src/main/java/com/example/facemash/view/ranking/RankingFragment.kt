@@ -15,10 +15,11 @@ import com.example.facemash.R
 import com.example.facemash.databinding.FragmentRankingBinding
 import com.example.facemash.view.main.MainViewModel
 import com.example.facemash.base.BaseFragment
-import com.example.facemash.utils.MusicPlayerInstance
+import com.example.facemash.utils.Constants
+import com.example.facemash.utils.PlayerInstance
+import com.example.facemash.utils.PreferenceUtils
 import com.example.facemash.utils.hide
 import com.example.facemash.utils.logd
-import com.example.facemash.utils.playMusic
 import com.example.facemash.utils.setAssetImageToDrawable
 import com.example.facemash.utils.setSingleClick
 import com.example.facemash.utils.show
@@ -42,6 +43,7 @@ import kotlin.time.Duration.Companion.milliseconds
 class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBinding::inflate) {
     private var isRecording = false
     private var isCountDown = false
+    private var isMusicStopped = false
     private val viewModel: MainViewModel by activityViewModels()
     private val detector = FaceDetection.getClient(
         FaceDetectorOptions.Builder()
@@ -71,7 +73,7 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
     }
 
     override fun FragmentRankingBinding.initView() {
-        initMusic()
+        setUpSound()
         setupView()
         setupCameraView()
 
@@ -79,6 +81,19 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
         rvItem.adapter = rankingAdapter
         rankingAdapter.submitList(viewModel.multipliedList)
         quizGame.setImageDrawable(listToShow[0])
+    }
+
+    private fun setUpSound() {
+        val music = viewModel.selectedMusic.value
+        if (music != null) {
+            binding.tvMusic.text = music.name
+            isMusicStopped = false
+            PlayerInstance.play(music.url)
+        } else {
+            binding.tvMusic.setText(R.string.add_sound)
+            isMusicStopped = true
+        }
+        binding.tvMusic.isSelected = true
     }
 
     private fun setupCameraView() {
@@ -241,15 +256,14 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
                 super.onVideoRecordingStart()
                 isRecording = true
 
-                playMusic(viewModel.selectedMusic.value!!)
+                PlayerInstance.player?.seekTo(0)
+                PlayerInstance.player?.play()
                 binding.btnStop.visibility = View.VISIBLE
 
                 showToast(requireContext(), "Recording started")
                 startSpinningEffect()
 
             }
-
-
 
             override fun onVideoRecordingEnd() {
                 super.onVideoRecordingEnd()
@@ -297,21 +311,9 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
         timer?.start()
     }
 
-    private fun initMusic() {
-        viewModel.selectedMusic.observe(viewLifecycleOwner){ musicData ->
-            if(musicData != null) {
-                playMusic(musicData)
-                binding.tvMusic.text = musicData.name
-            }else{
-                binding.tvMusic.text = "No Sound"
-                binding.layoutExitMusic.hide()
-            }
-        }
-    }
-
     private fun startRecording() {
         if (isRecording) return
-        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES),"Test")
+        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES), Constants.GAME_RECORD_FOLDER)
         if (!videoDirectory.exists() && !videoDirectory.mkdirs()) {
             showToast(requireContext(), "Failed to create directory")
             return
@@ -321,12 +323,13 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
 
         try {
             this.lifecycleScope.launch {
-                binding.imgIcon.hide()
+                binding.tvTap.hide()
                 binding.tvMusic.hide()
                 binding.btnMusic.hide()
                 binding.tvFilter.hide()
                 binding.rvItem.hide()
                 binding.imgRanking.hide()
+                binding.btnBack.hide()
 
 
                 binding.layoutCountdown.show()
@@ -376,13 +379,43 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
     }
 
     override fun FragmentRankingBinding.initListener() {
-
+        btnBack.setSingleClick {
+            navController.navigateUp()
+        }
+        btnMusic.setSingleClick {
+            PlayerInstance.pause()
+            navigateTo(R.id.songPickerFragment)
+        }
+        btnExitMusic.setSingleClick {
+            tvMusic.setText(R.string.add_sound)
+            PreferenceUtils.setValue("USE_SONG_DEFAULT", true)
+            isMusicStopped = true
+            PlayerInstance.stop()
+            layoutExitMusic.hide()
+        }
+        imgRanking.setSingleClick {
+            navigateTo(R.id.homeFragment)
+        }
     }
 
     override fun initObserver() {
+        viewModel.selectedMusic.observe(viewLifecycleOwner) { musicData ->
+            if (musicData != null) {
+                binding.tvMusic.text = musicData.name
+                binding.layoutExitMusic.show()
+                isMusicStopped = false
+                PlayerInstance.play(musicData.url)
+            } else {
+                binding.tvMusic.setText(R.string.add_sound)
+                binding.layoutExitMusic.hide()
+                isMusicStopped = true
+            }
+        }
+
         binding.root.setSingleClick {
             if (isRecording) return@setSingleClick
             else {
+                binding.tvTap.hide()
                 startRecording()
             }
         }
@@ -426,10 +459,25 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
         if (isRecording && !isCountDown) {
             tv.text = ""
             tv.isEnabled = false
-            tv.background = listToShow.last()
+
+            // Lấy drawable hiện tại
+            val drawable = listToShow.last()
+            tv.background = drawable
+
+            // Giữ cố định bounds theo kích thước View để không bị phình to
+            tv.post {
+                drawable?.setBounds(0, 0, tv.width, tv.height)
+            }
             listToShow.removeLastOrNull()
             if (listToShow.isNotEmpty()) startSpinningEffect()
             else binding.quizGame.setImageDrawable(null)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isMusicStopped) {
+            PlayerInstance.player?.play()
         }
     }
 
@@ -437,7 +485,12 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(FragmentRankingBind
         timer?.cancel()
         binding.cameraView.clearFrameProcessors()
         super.onDestroyView()
-        MusicPlayerInstance.stop()
+        PlayerInstance.stop()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        PlayerInstance.pause()
     }
 
 }

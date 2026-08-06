@@ -27,10 +27,11 @@ import com.example.facemash.databinding.FragmentLipPoseBinding
 import com.example.facemash.model.Point
 import com.example.facemash.view.main.MainViewModel
 import com.example.facemash.base.BaseFragment
-import com.example.facemash.utils.MusicPlayerInstance
+import com.example.facemash.utils.Constants
+import com.example.facemash.utils.PlayerInstance
+import com.example.facemash.utils.PreferenceUtils
 import com.example.facemash.utils.hide
 import com.example.facemash.utils.logd
-import com.example.facemash.utils.playMusic
 import com.example.facemash.utils.setSingleClick
 import com.example.facemash.utils.show
 import com.example.facemash.utils.showToast
@@ -75,33 +76,43 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
     private var isRecording = false
     private var isStartGame1 = false
     private var isStartGame2 = false
+    private var isMusicStopped = false
 
     private var score = 0
 
     override fun FragmentLipPoseBinding.initView() {
-        initMusic()
+        setUpSound()
         setupCameraView()
         setupView()
     }
 
-    private fun initMusic() {
-        viewModel.selectedMusic.observe(viewLifecycleOwner){ musicData ->
-            if(musicData != null) {
-                playMusic(musicData)
-                binding.tvMusic.text = musicData.name
-            }else{
-                binding.tvMusic.text = "No Sound"
-                binding.layoutExitMusic.hide()
-            }
+    private fun setUpSound() {
+        val music = viewModel.selectedMusic.value
+        if (music != null) {
+            binding.tvMusic.text = music.name
+            isMusicStopped = false
+            PlayerInstance.play(music.url)
+        } else {
+            binding.tvMusic.setText(R.string.add_sound)
+            isMusicStopped = true
         }
+        binding.tvMusic.isSelected = true
     }
 
     override fun FragmentLipPoseBinding.initListener() {
+        btnBack.setSingleClick {
+            navController.navigateUp()
+        }
         btnMusic.setSingleClick {
+            PlayerInstance.pause()
             navigateTo(R.id.songPickerFragment)
         }
         btnExitMusic.setSingleClick {
-            viewModel.setSelectedMusic(null)
+            tvMusic.setText(R.string.add_sound)
+            PreferenceUtils.setValue("USE_SONG_DEFAULT", true)
+            isMusicStopped = true
+            PlayerInstance.stop()
+            layoutExitMusic.hide()
         }
 
         imgLamp.setSingleClick {
@@ -114,7 +125,18 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
     }
 
     override fun initObserver() {
-
+        viewModel.selectedMusic.observe(viewLifecycleOwner) { musicData ->
+            if (musicData != null) {
+                binding.tvMusic.text = musicData.name
+                binding.layoutExitMusic.show()
+                isMusicStopped = false
+                PlayerInstance.play(musicData.url)
+            } else {
+                binding.tvMusic.setText(R.string.add_sound)
+                binding.layoutExitMusic.hide()
+                isMusicStopped = true
+            }
+        }
     }
 
     private fun setupView() {
@@ -131,7 +153,8 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
                 super.onVideoRecordingStart()
                 isRecording = true
 
-                playMusic(viewModel.selectedMusic.value!!)
+                PlayerInstance.player?.seekTo(0)
+                PlayerInstance.player?.play()
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     binding.imgScan.animate()
@@ -454,7 +477,7 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
 
     private fun startRecording() {
         if (isRecording) return
-        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES),"Test")
+        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES), Constants.GAME_RECORD_FOLDER)
         if (!videoDirectory.exists() && !videoDirectory.mkdirs()) {
             showToast(requireContext(), "Failed to create directory")
             return
@@ -471,6 +494,7 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
                 binding.imgFilter.hide()
                 binding.btnMusic.hide()
                 binding.tvFilter.hide()
+                binding.btnBack.hide()
 
 
                 binding.layoutCountdown.show()
@@ -495,11 +519,23 @@ class LipPoseFragment : BaseFragment<FragmentLipPoseBinding>(FragmentLipPoseBind
         binding.cameraView.stopVideo()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!isMusicStopped) {
+            PlayerInstance.player?.play()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        PlayerInstance.pause()
+    }
+
     override fun onDestroyView() {
         binding.cameraView.clearFrameProcessors()
         activeFallingLips.clear()
         super.onDestroyView()
-        MusicPlayerInstance.stop()
+        PlayerInstance.stop()
     }
 
     override fun onDestroy() {

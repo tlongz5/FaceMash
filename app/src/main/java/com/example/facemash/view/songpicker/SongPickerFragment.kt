@@ -7,7 +7,7 @@ import com.example.baseproject.model.MusicData
 import com.example.facemash.databinding.FragmentSongPickerBinding
 import com.example.facemash.view.main.MainViewModel
 import com.example.facemash.base.BaseFragment
-import com.example.facemash.utils.PlayerInstance.stop
+import com.example.facemash.utils.MusicPlayerInstance.stop
 import com.example.facemash.utils.playMusic
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
@@ -61,6 +61,11 @@ class SongPickerFragment : BaseFragment<FragmentSongPickerBinding>(FragmentSongP
                 selectedMusic = musicList.firstOrNull()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stop()
     }
 
     override fun onDestroyView() {

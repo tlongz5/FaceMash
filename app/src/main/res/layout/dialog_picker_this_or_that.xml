@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/dialog_quiz"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_pick_item_this_or_that"
+    android:paddingVertical="@dimen/_36sdp"
+    android:layout_marginHorizontal="@dimen/_36sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/btn_music"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:src="@drawable/bg_music"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/btn_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:src="@drawable/bg_logo"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_music" />
+
+
+    <ImageView
+        android:id="@+id/btn_math"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_48sdp"
+        android:src="@drawable/bg_math"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_logo" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

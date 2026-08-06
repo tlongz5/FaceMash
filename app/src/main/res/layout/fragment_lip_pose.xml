@@ -93,10 +93,22 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:src="@drawable/ic_lamp2"
+        android:alpha="0"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:contentDescription="@null"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:src="@drawable/ic_back_music"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_music"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_music" />
 
     <LinearLayout
         android:id="@+id/btn_music"
@@ -179,7 +191,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="@dimen/_16sdp"
-        android:src="@drawable/img_ranking"
+        android:src="@drawable/img_lip_poses"
         app:layout_constraintBottom_toBottomOf="@+id/btn_start"
         app:layout_constraintEnd_toStartOf="@+id/btn_start"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +203,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
         android:paddingHorizontal="@dimen/_5sdp"
-        android:text="Ranking"
+        android:text="@string/lip_pose"
 
         android:textColor="@color/white"
         android:textSize="@dimen/_8sdp"

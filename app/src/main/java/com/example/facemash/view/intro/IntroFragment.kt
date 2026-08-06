@@ -1,6 +1,7 @@
 package com.example.facemash.view.intro
 
 import androidx.viewpager2.widget.ViewPager2
+import androidx.navigation.NavOptions
 import com.example.facemash.R
 import com.example.facemash.databinding.FragmentIntroBinding
 import com.example.facemash.base.BaseFragment
@@ -40,7 +41,10 @@ class IntroFragment : BaseFragment<FragmentIntroBinding>(FragmentIntroBinding::i
             ++count
             if (count == 3) {
                 PreferenceUtils.setValue("is_first_launch", false)
-                navigateTo(R.id.homeFragment)
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.introFragment, true)
+                    .build()
+                navigateTo(R.id.homeFragment, null, navOptions)
             } else viewPager.currentItem = count
         }
     }

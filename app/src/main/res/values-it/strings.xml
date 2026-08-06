@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">Lingua</string>
+    <string name="next">Avanti</string>
+    <string name="done">Fatto</string>
+    <string name="trending">Tendenze</string>
+    <string name="all_game">Tutti i giochi</string>
+    <string name="record">Registra</string>
+    <string name="setting">Impostazioni</string>
+    <string name="about">Informazioni</string>
+    <string name="rate_us">Valutaci su App Store</string>
+    <string name="share_app">Condividi questa app</string>
+    <string name="send_feedback">Invia feedback</string>
+    <string name="term_privacy">Termini e Privacy</string>
+    <string name="term_conditions">Termini e Condizioni</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="exit_title">Esci?</string>
+    <string name="exit_msg">Sei sicuro di voler uscire senza salvare?</string>
+    <string name="cancel">Annulla</string>
+    <string name="ok">OK</string>
+    <string name="add_sound">Aggiungi suono</string>
+    <string name="no_sound">Nessun suono</string>
+    <string name="sound_title">Suono</string>
+    <string name="lip_pose">Posa delle labbra</string>
+    <string name="this_or_that">Questo o quello</string>
+    <string name="princess_or_witch">Principessa o strega</string>
+    <string name="ranking">Classifica</string>
+    <string name="intro_des_1">Vota i tuoi colori di capelli preferiti.\n Cosa va di moda e cosa no</string>
+    <string name="intro_title_2">Mescola il tuo umore</string>
+    <string name="intro_des_2">Crea istantaneamente esilaranti mashup dei tuoi preferiti.</string>
+    <string name="intro_title_3">Divertimento con la fusione dei filtri</string>
+    <string name="intro_des_3">Sfida la tua creatività con filtri pazzi!</string>
+    <string name="create_challenge_now">Crea sfida ora</string>
+    <string name="save_success">Salvataggio completato</string>
+    <string name="txt_share">Condividi</string>
+    <string name="txt_download">Scarica</string>
+</resources>

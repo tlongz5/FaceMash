@@ -54,7 +54,7 @@ class MainViewModel @Inject constructor(
 
     fun getTrendingData() = viewModelScope.launch {
         runCatching {
-            _trendingData.value = localRepo.getTrendingData()
+            _trendingData.value = localRepo.getTrendingData().drop(1)
         }.onFailure { e->
             e.printStackTrace()
         }

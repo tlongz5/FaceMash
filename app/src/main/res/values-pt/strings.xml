@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">Idioma</string>
+    <string name="next">Próximo</string>
+    <string name="done">Concluído</string>
+    <string name="trending">Tendências</string>
+    <string name="all_game">Todos os jogos</string>
+    <string name="record">Gravar</string>
+    <string name="setting">Configurações</string>
+    <string name="about">Sobre</string>
+    <string name="rate_us">Avalie-nos na App Store</string>
+    <string name="share_app">Compartilhar este aplicativo</string>
+    <string name="send_feedback">Enviar feedback</string>
+    <string name="term_privacy">Termos e Privacidade</string>
+    <string name="term_conditions">Termos e Condições</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="exit_title">Sair?</string>
+    <string name="exit_msg">Tem certeza de que deseja sair sem salvar?</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">OK</string>
+    <string name="add_sound">Adicionar som</string>
+    <string name="no_sound">Sem som</string>
+    <string name="sound_title">Som</string>
+    <string name="lip_pose">Pose de lábios</string>
+    <string name="this_or_that">Isso ou aquilo</string>
+    <string name="princess_or_witch">Princesa ou bruxa</string>
+    <string name="ranking">Classificação</string>
+    <string name="intro_des_1">Avalie suas cores de cabelo favoritas.\n O que está na moda ou não</string>
+    <string name="intro_title_2">Misture seu humor</string>
+    <string name="intro_des_2">Crie mashups divertidos instantaneamente.</string>
+    <string name="intro_title_3">Diversão de fusão de filtros</string>
+    <string name="intro_des_3">Desafie sua criatividade com filtros malucos!</string>
+    <string name="create_challenge_now">Criar desafio agora</string>
+    <string name="save_success">Salvo com sucesso</string>
+    <string name="txt_share">Compartilhar</string>
+    <string name="txt_download">Baixar</string>
+</resources>

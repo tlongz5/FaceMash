@@ -5,6 +5,8 @@ import com.example.facemash.model.LanguageModel
 
 object Constants {
     const val LANGUAGE_KEY = "LANGUAGE_KEY"
+    const val LANGUAGE_CODE = "LANGUAGE_CODE"
+    const val USE_SONG_DEFAULT = "USE_SONG_DEFAULT"
 
     const val MATH = "Math"
     const val MUSIC = "Music"
@@ -36,6 +38,8 @@ object Constants {
         const val TEXT = "Text"
         const val TEXT_MIX = "Text Mix"
     }
+
+    const val GAME_RECORD_FOLDER = "FaceMash"
 
     val filterType = listOf(
         FilterType.ALL_FILTER,

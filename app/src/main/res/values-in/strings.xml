@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">Bahasa</string>
+    <string name="next">Berikutnya</string>
+    <string name="done">Selesai</string>
+    <string name="trending">Sedang Tren</string>
+    <string name="all_game">Semua Permainan</string>
+    <string name="record">Rekam</string>
+    <string name="setting">Pengaturan</string>
+    <string name="about">Tentang</string>
+    <string name="rate_us">Beri peringkat di App Store</string>
+    <string name="share_app">Bagikan Aplikasi ini</string>
+    <string name="send_feedback">Kirim Umpan Balik</string>
+    <string name="term_privacy">Ketentuan &amp; Privasi</string>
+    <string name="term_conditions">Syarat &amp; Ketentuan</string>
+    <string name="privacy_policy">Kebijakan Privasi</string>
+    <string name="exit_title">Keluar?</string>
+    <string name="exit_msg">Apakah Anda yakin ingin keluar tanpa menyimpan?</string>
+    <string name="cancel">Batal</string>
+    <string name="ok">OK</string>
+    <string name="add_sound">Tambah Suara</string>
+    <string name="no_sound">Tanpa Suara</string>
+    <string name="sound_title">Suara</string>
+    <string name="lip_pose">Pose Bibir</string>
+    <string name="this_or_that">Ini atau Itu</string>
+    <string name="princess_or_witch">Putri atau Penyihir</string>
+    <string name="ranking">Peringkat</string>
+    <string name="intro_des_1">Beri peringkat warna rambut favorit Anda.\n Apa yang sedang tren atau tidak</string>
+    <string name="intro_title_2">Campur Suasana Hati Anda</string>
+    <string name="intro_des_2">Buat mashup favorit yang lucu secara instan.</string>
+    <string name="intro_title_3">Kesenangan Fusi Filter</string>
+    <string name="intro_des_3">Tantang kreativitas Anda dengan filter gila!</string>
+    <string name="create_challenge_now">Buat Tantangan Sekarang</string>
+    <string name="save_success">Berhasil disimpan</string>
+    <string name="txt_share">Bagikan</string>
+    <string name="txt_download">Unduh</string>
+</resources>

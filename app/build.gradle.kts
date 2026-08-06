@@ -24,6 +24,7 @@ android {
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "CONTENT_PROVIDER_AUTHORITY", "\"com.example.facemash.fileprovider\"")
     }
 
     buildTypes {
@@ -36,6 +37,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -44,6 +46,9 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.gms:play-services-ads:25.4.0")
+    implementation("androidx.lifecycle:lifecycle-process:2.8.4")
+
     implementation("com.google.mlkit:face-mesh-detection:16.0.0-beta1")
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -75,6 +80,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-process:2.8.4")
     implementation("com.google.dagger:hilt-android:2.57.1")
     implementation(libs.androidx.lifecycle.livedata.core.ktx)
     implementation(libs.androidx.recyclerview)

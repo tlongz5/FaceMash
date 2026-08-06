@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_record">
+    android:background="@drawable/bg_default">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/my_horizontal_guideline"
@@ -13,6 +13,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.0658" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_record"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/_60sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting" />
+
+    <ImageView
+        android:id="@+id/img_above"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_home_above"
+        app:layout_constraintDimensionRatio="412:120"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/btn_setting"
@@ -24,5 +44,75 @@
         app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"
         app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
         android:layout_marginStart="@dimen/_18sdp"/>
+
+    <ImageView
+        android:id="@+id/btn_delete"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:src="@drawable/ic_delete"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        app:layout_constraintDimensionRatio="150:48"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"
+        app:layout_constraintVertical_bias="0.232" />
+
+    <ImageView
+        android:id="@+id/btn_send"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:src="@drawable/ic_forward"
+        android:layout_marginEnd="@dimen/_18sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        app:layout_constraintDimensionRatio="150:48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline" />
+
+    <ImageView
+        android:id="@+id/btn_select"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_select"
+        android:layout_marginEnd="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        app:layout_constraintDimensionRatio="150:48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:src="@drawable/ic_back"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="150:48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/my_horizontal_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/my_horizontal_guideline"
+        android:layout_marginStart="@dimen/_18sdp"/>
+
+
+    <com.example.facemash.utils.config.GradientStrokeTextView
+        android:id="@+id/tv_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/grandstander_extrabold"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:text="@string/record"
+
+        android:textColor="@color/white"
+        android:textSize="@dimen/_24sdp"
+        app:gradientEndColor="#F6B454"
+        app:gradientStartColor="#FEE902"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_select"
+        app:shadowColor="#000000"
+        app:shadowDy="2dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1.5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

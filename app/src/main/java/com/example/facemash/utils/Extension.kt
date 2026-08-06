@@ -17,6 +17,10 @@ import com.example.baseproject.model.MusicData
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.util.Locale
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import androidx.core.net.toUri
+import com.example.facemash.R
 
 fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -112,6 +116,9 @@ fun setAssetImageToDrawable(context: Context, fileName: String): Drawable? {
 }
 
 fun Context.setAppLocale(languageCode: String): Context {
+    val localeList = LocaleListCompat.forLanguageTags(languageCode)
+    AppCompatDelegate.setApplicationLocales(localeList)
+
     val locale = Locale(languageCode)
     Locale.setDefault(locale)
     val config = Configuration(resources.configuration)
@@ -119,32 +126,51 @@ fun Context.setAppLocale(languageCode: String): Context {
     resources.updateConfiguration(config, resources.displayMetrics)
     return createConfigurationContext(config)
 }
-//
-//fun Context.sendMail(
-//    withMessage: Boolean = true
-//) {
-//    val osName = Build.VERSION.RELEASE
-//    val locale = this.resources.configuration.locales[0] ?: ""
-//    val manager = this.packageManager
-//    val info = manager.getPackageInfo(
-//        this.packageName, 0
-//    )
-//    val version = info.versionName
-//
-//    val message = getString(
-//        R.string.message_email, osName, locale, version
-//    )
-//
-//    val selectorIntent = Intent(Intent.ACTION_SENDTO)
-//    selectorIntent.data = Uri.parse(MAIL_TO)
-//    val emailIntent = Intent(Intent.ACTION_SEND)
-//    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(RECIPIENT_EMAIL))
-//    emailIntent.putExtra(
-//        Intent.EXTRA_SUBJECT,
-//        getString(R.string.subject_feedback)
-//    )
-//    if (withMessage)
-//        emailIntent.putExtra(Intent.EXTRA_TEXT, message)
-//    emailIntent.selector = selectorIntent
-//    this.startActivity(Intent.createChooser(emailIntent, INTENT_TITLE))
-//}
+
+fun Context.openAppInStore() {
+    val intent = Intent(Intent.ACTION_VIEW)
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri())
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        this.startActivity(intent)
+    }catch (e: Exception){
+        val webIntent = Intent(Intent.ACTION_VIEW,
+            "https://play.google.com/store/apps/details?id=$packageName".toUri())
+        this.startActivity(webIntent)
+    }
+
+}
+
+fun Context.shareApp() {
+    val intent = Intent(Intent.ACTION_SEND)
+    val shareBody = "Check out this amazing app: https://play.google.com/store/apps/details?id=$packageName"
+    intent.type = "text/plain"
+    intent.putExtra(Intent.EXTRA_SUBJECT, "Share App")
+    intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+    this.startActivity(intent)
+}
+
+fun Context.sendMail() {
+    val osVersion = Build.VERSION.RELEASE
+    val country = resources.configuration.locales[0].displayCountry
+    val appVersion = try {
+        packageManager.getPackageInfo(packageName, 0).versionName
+    } catch (e: Exception) {
+        "Unknown"
+    }
+
+    val subject = getString(R.string.subject_feedback)
+    val body = "$subject\n\nOs Version: $osVersion\nCountry: $country\nApp Version: $appVersion\n${getString(R.string.message_email)}"
+
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        data = Uri.parse("mailto:")
+        putExtra(Intent.EXTRA_EMAIL, arrayOf("thangnd99308@gmail.com"))
+        putExtra(Intent.EXTRA_TEXT, body)
+    }
+
+    try {
+        startActivity(Intent.createChooser(intent, "Send Email"))
+    } catch (e: Exception) {
+        showToast(this, "No email client found")
+    }
+}

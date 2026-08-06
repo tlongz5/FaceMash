@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="next">Tiếp theo</string>
+    <string name="done">Xong</string>
+    <string name="trending">Xu hướng</string>
+    <string name="all_game">Tất cả trò chơi</string>
+    <string name="record">Ghi hình</string>
+    <string name="setting">Cài đặt</string>
+    <string name="about">Về chúng tôi</string>
+    <string name="rate_us">Đánh giá trên App Store</string>
+    <string name="share_app">Chia sẻ ứng dụng</string>
+    <string name="send_feedback">Gửi phản hồi</string>
+    <string name="term_privacy">Điều khoản &amp; Bảo mật</string>
+    <string name="term_conditions">Điều khoản &amp; Điều kiện</string>
+    <string name="privacy_policy">Chính sách Bảo mật</string>
+    <string name="exit_title">Thoát?</string>
+    <string name="exit_msg">Bạn có chắc chắn muốn thoát mà không lưu không?</string>
+    <string name="cancel">Hủy</string>
+    <string name="ok">Đồng ý</string>
+
+    <string name="intro_title_1">Bộ lọc Xếp hạng</string>
+    <string name="intro_des_1">Đánh giá màu tóc yêu thích của bạn.\n Điều gì đang hot hay không</string>
+    <string name="intro_title_2">Trộn cảm xúc</string>
+    <string name="intro_des_2">Tạo ra những màn kết hợp thú vị ngay lập tức.</string>
+    <string name="intro_title_3">Filter Fusion Fun</string>
+    <string name="intro_des_3">Thử thách sự sáng tạo với những bộ lọc điên rồ!</string>
+
+    <string name="add_sound">Thêm âm thanh</string>
+    <string name="message_email">Vui lòng cho chúng tôi biết ý kiến của bạn: </string>
+    <string name="subject_feedback">[Capybara Android] Phản hồi</string>
+    <string name="msg_title_audio_access">\"App\" muốn truy cập Âm thanh</string>
+    <string name="msg_description_audio_access">Vui lòng đi tới Cài đặt để cho phép truy cập Âm thanh</string>
+    <string name="lip_pose">Lip Pose</string>
+    <string name="this_or_that">This or That</string>
+    <string name="princess_or_witch">Công chúa hay Phù thủy</string>
+    <string name="ranking">Xếp hạng</string>
+    <string name="no_sound">Không có âm thanh</string>
+    <string name="sound_title">Âm thanh</string>
+    <string name="create_challenge_now">Tạo thử thách ngay</string>
+    <string name="save_success">Lưu thành công</string>
+    <string name="txt_share">Chia sẻ</string>
+    <string name="txt_download">Tải xuống</string>
+</resources>
+
+
+

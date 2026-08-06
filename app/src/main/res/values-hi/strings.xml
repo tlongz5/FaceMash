@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">भाषा</string>
+    <string name="next">अगला</string>
+    <string name="done">हो गया</string>
+    <string name="trending">ट्रेंडिंग</string>
+    <string name="all_game">सभी खेल</string>
+    <string name="record">रिकॉर्ड</string>
+    <string name="setting">सेटिंग</string>
+    <string name="about">के बारे में</string>
+    <string name="rate_us">App Store पर हमें रेट करें</string>
+    <string name="share_app">इस ऐप को साझा करें</string>
+    <string name="send_feedback">प्रतिक्रिया भेजें</string>
+    <string name="term_privacy">अवधि और गोपनीयता</string>
+    <string name="term_conditions">नियम एवं शर्तें</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="exit_title">बाहर निकलें?</string>
+    <string name="exit_msg">क्या आप वाकई बिना सहेजे बाहर निकलना चाहते हैं?</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="ok">ठीक है</string>
+    <string name="add_sound">ध्वनि जोड़ें</string>
+    <string name="no_sound">कोई ध्वनि नहीं</string>
+    <string name="sound_title">ध्वनि</string>
+    <string name="lip_pose">लिप पोज़</string>
+    <string name="this_or_that">यह या वह</string>
+    <string name="princess_or_witch">राजकुमारी या चुड़ैल</string>
+    <string name="ranking">रैंकिंग</string>
+    <string name="intro_des_1">अपने पसंदीदा बालों के रंगों को रेट करें।\n क्या हॉट है या क्या नहीं</string>
+    <string name="intro_title_2">अपना मूड मिक्स करें</string>
+    <string name="intro_des_2">तुरंत प्रफुल्लित करने वाले पसंदीदा मैशप बनाएं।</string>
+    <string name="intro_title_3">फ़िल्टर फ़्यूज़न मज़ा</string>
+    <string name="intro_des_3">पागल फ़िल्टर के साथ अपनी रचनात्मकता को चुनौती दें!</string>
+    <string name="create_challenge_now">अब चुनौती बनाएँ</string>
+    <string name="save_success">सफलतापूर्वक सहेजा गया</string>
+    <string name="txt_share">साझा करें</string>
+    <string name="txt_download">डाउनलोड करें</string>
+</resources>

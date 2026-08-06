@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
-        android:text="Setting"
+        android:text="@string/setting"
         android:textColor="@color/white"
         android:textSize="@dimen/_22sdp"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
-        android:text="About"
+        android:text="@string/about"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:gradientEndColor="@color/white"
@@ -62,6 +62,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
+            android:background="@drawable/bg_ripple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_14sdp"
@@ -79,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Rate us on App Store"
+                android:text="@string/rate_us"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
@@ -94,6 +95,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple"
             app:layout_constraintTop_toBottomOf="@+id/view1"
             android:padding="@dimen/_14sdp">
 
@@ -109,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Share this App"
+                android:text="@string/share_app"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
@@ -124,6 +126,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple"
             android:padding="@dimen/_14sdp"
             app:layout_constraintTop_toBottomOf="@+id/view2">
 
@@ -139,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Send Feedback"
+                android:text="@string/send_feedback"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
@@ -154,6 +157,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple"
             android:padding="@dimen/_14sdp"
             app:layout_constraintTop_toBottomOf="@+id/view3">
 
@@ -169,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Language"
+                android:text="@string/language"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
@@ -180,7 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/grandstander_extrabold"
-        android:text="Term &amp; Privacy"
+        android:text="@string/term_privacy"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:gradientEndColor="@color/white"
@@ -191,7 +195,6 @@
         app:layout_constraintStart_toStartOf="@+id/btn_back"
         app:layout_constraintTop_toBottomOf="@+id/constraint_1" />
 
-    <!-- ĐÂY LÀ PHẦN BẠN CÒN THIẾU -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_2"
         android:layout_width="match_parent"
@@ -205,6 +208,7 @@
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple"
             android:padding="@dimen/_14sdp"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -220,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Term &amp; Conditions"
+                android:text="@string/term_conditions"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
@@ -235,6 +239,7 @@
             android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple"
             app:layout_constraintTop_toBottomOf="@+id/view4"
             android:padding="@dimen/_14sdp">
 
@@ -250,10 +255,20 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/grandstander_semibold"
                 android:gravity="center"
-                android:text="Privacy Policy"
+                android:text="@string/privacy_policy"
                 android:textColor="#2D3E5A" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">Sprache</string>
+    <string name="next">Weiter</string>
+    <string name="done">Fertig</string>
+    <string name="trending">Angesagt</string>
+    <string name="all_game">Alle Spiele</string>
+    <string name="record">Aufnahme</string>
+    <string name="setting">Einstellung</string>
+    <string name="about">Über</string>
+    <string name="rate_us">Bewerten Sie uns im App Store</string>
+    <string name="share_app">Diese App teilen</string>
+    <string name="send_feedback">Feedback senden</string>
+    <string name="term_privacy">Bestimmungen &amp; Datenschutz</string>
+    <string name="term_conditions">Allgemeine Geschäftsbedingungen</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="exit_title">Beenden?</string>
+    <string name="exit_msg">Sind Sie sicher, dass Sie beenden möchten, ohne zu speichern?</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
+    <string name="add_sound">Ton hinzufügen</string>
+    <string name="no_sound">Kein Ton</string>
+    <string name="sound_title">Ton</string>
+    <string name="lip_pose">Lippenpose</string>
+    <string name="this_or_that">Dies oder das</string>
+    <string name="princess_or_witch">Prinzessin oder Hexe</string>
+    <string name="ranking">Ranking</string>
+    <string name="intro_des_1">Bewerten Sie Ihre Lieblingshaarfarben.\n Was angesagt ist und was nicht</string>
+    <string name="intro_title_2">Mische deine Stimmung</string>
+    <string name="intro_des_2">Erstellen Sie sofort urkomische Mashups Ihrer Favoriten.</string>
+    <string name="intro_title_3">Filter Fusion Spaß</string>
+    <string name="intro_des_3">Fordern Sie Ihre Kreativität mit verrückten Filtern heraus!</string>
+    <string name="create_challenge_now">Herausforderung jetzt erstellen</string>
+    <string name="save_success">Erfolgreich gespeichert</string>
+    <string name="txt_share">Teilen</string>
+    <string name="txt_download">Herunterladen</string>
+</resources>

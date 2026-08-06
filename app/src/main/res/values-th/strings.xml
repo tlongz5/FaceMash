@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">ภาษา</string>
+    <string name="next">ถัดไป</string>
+    <string name="done">เสร็จสิ้น</string>
+    <string name="trending">เทรนด์</string>
+    <string name="all_game">เกมทั้งหมด</string>
+    <string name="record">บันทึก</string>
+    <string name="setting">ตั้งค่า</string>
+    <string name="about">เกี่ยวกับ</string>
+    <string name="rate_us">ให้คะแนนเราใน App Store</string>
+    <string name="share_app">แชร์แอปนี้</string>
+    <string name="send_feedback">ส่งข้อเสนอแนะ</string>
+    <string name="term_privacy">ข้อกำหนดและความเป็นส่วนตัว</string>
+    <string name="term_conditions">ข้อกำหนดและเงื่อนไข</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="exit_title">ออก?</string>
+    <string name="exit_msg">คุณแน่ใจหรือไม่ว่าต้องการออกจากโปรแกรมโดยไม่บันทึก?</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="ok">ตกลง</string>
+    <string name="add_sound">เพิ่มเสียง</string>
+    <string name="no_sound">ไม่มีเสียง</string>
+    <string name="sound_title">เสียง</string>
+    <string name="lip_pose">ท่าทางริมฝีปาก</string>
+    <string name="this_or_that">อันนี้หรืออันนั้น</string>
+    <string name="princess_or_witch">เจ้าหญิงหรือแม่มด</string>
+    <string name="ranking">อันดับ</string>
+    <string name="intro_des_1">ให้คะแนนสีผมที่คุณชอบ\n อะไรที่ฮอตหรือไม่ฮอต</string>
+    <string name="intro_title_2">ผสมอารมณ์ของคุณ</string>
+    <string name="intro_des_2">สร้างการผสมผสานรายการโปรดที่สนุกสนานได้ทันที</string>
+    <string name="intro_title_3">ความสนุกจากการรวมฟิลเตอร์</string>
+    <string name="intro_des_3">ท้าทายความคิดสร้างสรรค์ของคุณด้วยฟิลเตอร์สุดเจ๋ง!</string>
+    <string name="create_challenge_now">สร้างความท้าทายตอนนี้</string>
+    <string name="save_success">บันทึกสำเร็จ</string>
+    <string name="txt_share">แชร์</string>
+    <string name="txt_download">ดาวน์โหลด</string>
+</resources>

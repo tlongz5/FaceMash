@@ -53,7 +53,7 @@ class SongPickerAdapter(
             }
 
             if (item.name.isEmpty()) {
-                songName.text = "No Sound"
+                songName.setText(R.string.no_sound)
                 imgPlay.hide()
                 imgSong.setImageResource(R.drawable.img_no_song)
             } else {

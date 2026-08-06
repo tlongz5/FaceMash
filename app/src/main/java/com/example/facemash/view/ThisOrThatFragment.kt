@@ -29,12 +29,14 @@ import com.example.facemash.R
 import com.example.facemash.databinding.FragmentThisOrThatBinding
 import com.example.facemash.view.main.MainViewModel
 import com.example.facemash.base.BaseFragment
+import com.example.facemash.model.Game
 import com.example.facemash.utils.Constants
 import com.example.facemash.utils.DimenExt
-import com.example.facemash.utils.MusicPlayerInstance
+import com.example.facemash.utils.PlayerInstance
+import com.example.facemash.utils.PreferenceUtils
 import com.example.facemash.utils.hide
 import com.example.facemash.utils.logd
-import com.example.facemash.utils.playMusic
+import com.example.facemash.utils.setAssetImageToDrawable
 import com.example.facemash.utils.setSingleClick
 import com.example.facemash.utils.show
 import com.example.facemash.utils.showToast
@@ -63,7 +65,10 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     private var isRecording = false
     private var isStartGame = false
     private var isAnswering = false
+    private var isMusicStopped = false
 
+    private var currentCategory: String = ""
+    private var currentGame: Game? = null
     private var questions: List<Question> = listOf()
     private var currentQuestionIndex = 0
 
@@ -88,36 +93,215 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
             .build()
     )
 
+    private val thisOrThatAdapter = ThisOrThatAdapter { game, _ ->
+        if (game.questions.isNotEmpty()) {
+            currentGame = game
+            questions = game.questions
+            currentQuestionIndex = 0
+            resetGameView()
+            updateQuestion()
+
+            // Auto update music based on game ID
+            if (game.category.equals("Music", ignoreCase = true)) {
+                viewModel.dataMusicFromAssets.value?.find { it.id == game.id }?.let { music ->
+                    viewModel.setSelectedMusic(music)
+                }
+            } else if (game.category.equals("Math", ignoreCase = true)) {
+                viewModel.dataMusicFromAssets.value?.find { it.id == "apt" }?.let { music ->
+                    viewModel.setSelectedMusic(music)
+                }
+            }
+        }
+    }
+
     override fun FragmentThisOrThatBinding.initView() {
-        initMusic()
+        setUpSound()
         setupView()
         setupCameraView()
+        rvItem.adapter = thisOrThatAdapter
+    }
+
+    private fun setUpSound() {
+        val music = viewModel.selectedMusic.value
+        if (music != null) {
+            binding.tvMusic.text = music.name
+            isMusicStopped = false
+            PlayerInstance.play(music.url)
+        } else {
+            binding.tvMusic.setText(R.string.add_sound)
+            isMusicStopped = true
+        }
+        binding.tvMusic.isSelected = true
     }
 
     override fun FragmentThisOrThatBinding.initListener() {
+        btnBack.setSingleClick {
+            navController.navigateUp()
+        }
+        btnMusic.setSingleClick {
+            PlayerInstance.pause()
+            navigateTo(R.id.songPickerFragment)
+        }
+        btnExitMusic.setSingleClick {
+            tvMusic.setText(R.string.add_sound)
+            PreferenceUtils.setValue("USE_SONG_DEFAULT", true)
+            isMusicStopped = true
+            PlayerInstance.stop()
+            layoutExitMusic.hide()
+        }
+        imgFilter.setSingleClick {
+            showTypePickerDialog()
+        }
+        tvFilter.setSingleClick {
+            showTypePickerDialog()
+        }
 
+        binding.tvTap.setSingleClick {
+            binding.tvTap.hide()
+            startRecording()
+        }
     }
 
-    private fun initMusic() {
-        viewModel.selectedMusic.observe(viewLifecycleOwner){ musicData ->
-            if(musicData != null) {
-                playMusic(musicData)
-                binding.tvMusic.text = musicData.name
-            }else{
-                binding.tvMusic.text = "No Sound"
-                binding.layoutExitMusic.hide()
+    private fun showTypePickerDialog() {
+        val dialog = android.app.Dialog(requireContext())
+        val bindingDialog = com.example.facemash.databinding.DialogPickerThisOrThatBinding.inflate(layoutInflater)
+        dialog.setContentView(bindingDialog.root)
+        dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+
+        bindingDialog.btnMusic.setSingleClick {
+            updateCategoryList("Music")
+            dialog.dismiss()
+        }
+        bindingDialog.btnLogo.setSingleClick {
+            updateCategoryList("Logo")
+            dialog.dismiss()
+        }
+        bindingDialog.btnMath.setSingleClick {
+            updateCategoryList("Math")
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun updateCategoryList(category: String) {
+        currentCategory = category
+        val allGames = viewModel.gamesData.value ?: emptyList()
+        val filteredGames = when (category) {
+            "Logo" -> {
+                val logoList = allGames.filter {
+                    it.category.equals("Logo", ignoreCase = true) ||
+                    it.type.equals("Logo", ignoreCase = true) ||
+                    it.name.contains("Logo", ignoreCase = true)
+                }
+                if (logoList.isNotEmpty()) {
+                    logoList
+                } else {
+                    listOf(
+                        Game(id = "logo1", categoryItem = "Logo App", name = "Logo", type = "Logo", category = "Logo",
+                            questions = listOf(
+                                Question(trueAnswer = "T1A", falseAnswer = "F1A"),
+                                Question(trueAnswer = "T1B", falseAnswer = "F1B"),
+                                Question(trueAnswer = "T1C", falseAnswer = "F1C")
+                            )
+                        ),
+                        Game(id = "logo2", categoryItem = "Logo Food", name = "Logo", type = "Logo", category = "Logo",
+                            questions = listOf(
+                                Question(trueAnswer = "T2A", falseAnswer = "F2A"),
+                                Question(trueAnswer = "T2B", falseAnswer = "F2B"),
+                                Question(trueAnswer = "T2C", falseAnswer = "F2C")
+                            )
+                        ),
+                        Game(id = "logo3", categoryItem = "Logo Car", name = "Logo", type = "Logo", category = "Logo",
+                            questions = listOf(
+                                Question(trueAnswer = "T3A", falseAnswer = "F3A"),
+                                Question(trueAnswer = "T3B", falseAnswer = "F3B"),
+                                Question(trueAnswer = "T3C", falseAnswer = "F3C")
+                            )
+                        ),
+                        Game(id = "logo4", categoryItem = "Logo Brand", name = "Logo", type = "Logo", category = "Logo",
+                            questions = listOf(
+                                Question(trueAnswer = "T1D", falseAnswer = "F1D")
+                            )
+                        )
+                    )
+                }
+            }
+            "Math" -> {
+                val mathList = allGames.filter {
+                    it.category.equals("Math", ignoreCase = true) ||
+                    it.type.equals("Math", ignoreCase = true)
+                }
+                if (mathList.isNotEmpty()) mathList else listOf(
+                    Game(id = "math1", categoryItem = "Addition", name = "Math", type = "Text", category = "Math",
+                        questions = listOf(Question(question = "1 + 1 = ?", trueAnswer = "2", falseAnswer = "3"))
+                    ),
+                    Game(id = "math2", categoryItem = "Substraction", name = "Math", type = "Text", category = "Math",
+                        questions = listOf(Question(question = "5 - 2 = ?", trueAnswer = "3", falseAnswer = "2"))
+                    )
+                )
+            }
+            else -> {
+                allGames.filter {
+                    it.category.equals("Music", ignoreCase = true) &&
+                    it.type.equals("Text", ignoreCase = true)
+                }
+            }
+        }
+
+        val listToDisplay = if (filteredGames.isNotEmpty()) filteredGames else allGames
+        thisOrThatAdapter.submitList(listToDisplay)
+
+        val selectedGame = listToDisplay.firstOrNull()
+        if (selectedGame != null && selectedGame.questions.isNotEmpty()) {
+            currentGame = selectedGame
+            questions = selectedGame.questions
+            currentQuestionIndex = 0
+            resetGameView()
+            updateQuestion()
+
+            // Initial music setup
+            if (selectedGame.category.equals("Music", ignoreCase = true)) {
+                viewModel.dataMusicFromAssets.value?.find { it.id == selectedGame.id }?.let { music ->
+                    viewModel.setSelectedMusic(music)
+                }
+            } else if (selectedGame.category.equals("Math", ignoreCase = true)) {
+                viewModel.dataMusicFromAssets.value?.find { it.id == "apt" }?.let { music ->
+                    viewModel.setSelectedMusic(music)
+                }
             }
         }
     }
 
     override fun initObserver() {
+        viewModel.selectedMusic.observe(viewLifecycleOwner) { musicData ->
+            if (musicData != null) {
+                binding.tvMusic.text = musicData.name
+                binding.layoutExitMusic.show()
+                isMusicStopped = false
+                PlayerInstance.play(musicData.url)
+            } else {
+                binding.tvMusic.setText(R.string.add_sound)
+                binding.layoutExitMusic.hide()
+                isMusicStopped = true
+            }
+        }
+
+        binding.root.setSingleClick {
+            if (isRecording) return@setSingleClick
+            else {
+                binding.tvTap.hide()
+                startRecording()
+            }
+        }
+
         val category = arguments?.getString("category") ?: "Music"
+        if (currentCategory.isEmpty()) {
+            currentCategory = category
+        }
         viewModel.gamesData.observe(viewLifecycleOwner){ games ->
-            val listGame = games.filter { it.category == category }
-            if (listGame.isNotEmpty()) {
-                questions = listGame.random().questions
-                currentQuestionIndex = 0
-                updateQuestion()
+            if (games.isNotEmpty()) {
+                updateCategoryList(currentCategory)
             }
         }
     }
@@ -125,27 +309,76 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
     private fun updateQuestion() {
         if (questions.isNotEmpty() && currentQuestionIndex < questions.size) {
             val question = questions[currentQuestionIndex]
-            if(question.trueSide == 0){
-                binding.quizGame.viewAnswerLeft.txtAnswer.text = question.trueAnswer
-                binding.quizGame.viewAnswerRight.txtAnswer.text = question.falseAnswer
+            val leftAnswer: String
+            val rightAnswer: String
+            if (question.trueSide == 0) {
+                leftAnswer = question.trueAnswer
+                rightAnswer = question.falseAnswer
+            } else {
+                leftAnswer = question.falseAnswer
+                rightAnswer = question.trueAnswer
             }
-            else{
-                binding.quizGame.viewAnswerLeft.txtAnswer.text = question.falseAnswer
-                binding.quizGame.viewAnswerRight.txtAnswer.text = question.trueAnswer
+
+            val isLogoGame = currentGame?.type.equals("Logo", ignoreCase = true) ||
+                    currentGame?.category.equals("Logo", ignoreCase = true) ||
+                    currentGame?.name?.contains("Logo", ignoreCase = true) == true
+
+            if (isLogoGame) {
+                binding.quizGame.tvLogoQuestion.show()
+                binding.quizGame.viewQuestion.root.visibility = View.INVISIBLE
+                binding.quizGame.capyLeft.hide()
+                binding.quizGame.capyRight.hide()
+
+                binding.quizGame.viewAnswerLeft.txtAnswer.hide()
+                binding.quizGame.viewAnswerLeft.icon1.hide()
+                binding.quizGame.viewAnswerLeft.icon2.hide()
+                binding.quizGame.viewAnswerLeft.icon3.hide()
+                binding.quizGame.viewAnswerLeft.icon4.hide()
+                binding.quizGame.viewAnswerLeft.imgLogo.show()
+                val leftPath = if (leftAnswer.endsWith(".webp")) "logo/$leftAnswer" else "logo/$leftAnswer.webp"
+                binding.quizGame.viewAnswerLeft.imgLogo.setImageDrawable(
+                    setAssetImageToDrawable(requireContext(), leftPath)
+                )
+
+                binding.quizGame.viewAnswerRight.txtAnswer.hide()
+                binding.quizGame.viewAnswerRight.icon1.hide()
+                binding.quizGame.viewAnswerRight.icon2.hide()
+                binding.quizGame.viewAnswerRight.icon3.hide()
+                binding.quizGame.viewAnswerRight.icon4.hide()
+                binding.quizGame.viewAnswerRight.imgLogo.show()
+                val rightPath = if (rightAnswer.endsWith(".webp")) "logo/$rightAnswer" else "logo/$rightAnswer.webp"
+                binding.quizGame.viewAnswerRight.imgLogo.setImageDrawable(
+                    setAssetImageToDrawable(requireContext(), rightPath)
+                )
+            } else {
+                binding.quizGame.tvLogoQuestion.hide()
+                binding.quizGame.viewQuestion.root.show()
+                binding.quizGame.capyLeft.show()
+                binding.quizGame.capyRight.show()
+
+                binding.quizGame.viewQuestion.txtQuestion.text = question.question
+                binding.quizGame.viewQuestion.txtQuestion.show()
+
+                binding.quizGame.viewAnswerLeft.imgLogo.hide()
+                binding.quizGame.viewAnswerLeft.icon1.hide()
+                binding.quizGame.viewAnswerLeft.icon2.hide()
+                binding.quizGame.viewAnswerLeft.icon3.hide()
+                binding.quizGame.viewAnswerLeft.icon4.hide()
+                binding.quizGame.viewAnswerLeft.txtAnswer.text = leftAnswer
+                binding.quizGame.viewAnswerLeft.txtAnswer.show()
+
+                binding.quizGame.viewAnswerRight.imgLogo.hide()
+                binding.quizGame.viewAnswerRight.icon1.hide()
+                binding.quizGame.viewAnswerRight.icon2.hide()
+                binding.quizGame.viewAnswerRight.icon3.hide()
+                binding.quizGame.viewAnswerRight.icon4.hide()
+                binding.quizGame.viewAnswerRight.txtAnswer.text = rightAnswer
+                binding.quizGame.viewAnswerRight.txtAnswer.show()
             }
-            binding.quizGame.viewQuestion.txtQuestion.text = question.question
-            binding.quizGame.viewQuestion.txtQuestion.show()
-            binding.quizGame.viewAnswerLeft.txtAnswer.show()
-            binding.quizGame.viewAnswerRight.txtAnswer.show()
         }
     }
 
     private fun setupView() {
-        binding.btnStart.setSingleClick {
-            if (isRecording) return@setSingleClick
-            startRecording()
-        }
-
         binding.btnStop.setSingleClick {
             if (!isRecording) return@setSingleClick
             stopRecording()
@@ -156,9 +389,9 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
                 super.onVideoRecordingStart()
                 isRecording = true
 
-                playMusic(viewModel.selectedMusic.value!!)
+                PlayerInstance.player?.seekTo(0)
+                PlayerInstance.player?.play()
 
-                binding.btnStart.visibility = View.GONE
                 binding.btnStop.visibility = View.VISIBLE
 
                 showToast(requireContext(), "Recording started")
@@ -170,7 +403,7 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
                 isRecording = false
                 isStartGame = false
 
-                binding.btnStart.visibility = View.VISIBLE
+//                binding.btnStart.visibility = View.VISIBLE
                 binding.btnStop.visibility = View.GONE
             }
 
@@ -523,7 +756,7 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
 
     private fun startRecording() {
         if (isRecording) return
-        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES),"Test")
+        val videoDirectory = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES), Constants.GAME_RECORD_FOLDER)
         if (!videoDirectory.exists() && !videoDirectory.mkdirs()) {
             showToast(requireContext(), "Failed to create directory")
             return
@@ -533,11 +766,14 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
 
         try {
             this.lifecycleScope.launch {
+                binding.tvTap.hide()
                 binding.imgIcon.hide()
                 binding.tvMusic.hide()
                 binding.imgFilter.hide()
                 binding.btnMusic.hide()
                 binding.tvFilter.hide()
+                binding.rvItem.hide()
+                binding.btnBack.hide()
 
 
                 binding.layoutCountdown.show()
@@ -565,10 +801,24 @@ class ThisOrThatFragment : BaseFragment<FragmentThisOrThatBinding>(FragmentThisO
         binding.cameraView.stopVideo()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!isMusicStopped) {
+            PlayerInstance.player?.play()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        PlayerInstance.pause()
+    }
+
+
+
     override fun onDestroyView() {
         binding.cameraView.clearFrameProcessors()
         super.onDestroyView()
-        MusicPlayerInstance.stop()
+        PlayerInstance.stop()
     }
 
 }

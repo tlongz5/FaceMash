@@ -7,18 +7,18 @@ import com.example.facemash.model.LanguageModel
 object Helper {
     val introList = listOf(
         IntroPager(
-            name = "Ranking Filter",
-            des = "Rate your fave hair colors.\n What’s hot or not",
+            name = R.string.intro_title_1,
+            des = R.string.intro_des_1,
             image = R.drawable.intro_1
         ),
         IntroPager(
-            name = "Mix Your Mood",
-            des = "Create hilarious fave mashups instantly.",
+            name = R.string.intro_title_2,
+            des = R.string.intro_des_2,
             image = R.drawable.intro_2
         ),
         IntroPager(
-            name = "Filter Fusion Fun",
-            des = "Challenge your creativity with crazy filters!",
+            name = R.string.intro_title_3,
+            des = R.string.intro_des_3,
             image = R.drawable.intro_3
         )
     )

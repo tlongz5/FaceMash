@@ -11,7 +11,11 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.facemash.databinding.ActivityMainBinding
+import com.example.facemash.di.App
 import com.example.facemash.view.NetworkReceiver
+import com.example.facemash.utils.Constants
+import com.example.facemash.utils.PreferenceUtils
+import com.example.facemash.utils.setAppLocale
 import com.example.facemash.utils.logd
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +35,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        val languageCode = PreferenceUtils.getValue(Constants.LANGUAGE_CODE, "en")
+        setAppLocale(languageCode)
+        
         installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -51,6 +59,9 @@ class MainActivity : AppCompatActivity() {
         // 3. Ẩn thanh điều hướng bên dưới (Navigation Bar)
         windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+
+        val manager = (application as App).appOpenAdManager
+        manager.loadAd(this)
 
         registerReceiver(networkReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }

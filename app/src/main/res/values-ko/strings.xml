@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">FaceMash</string>
+    <string name="language">언어</string>
+    <string name="next">다음</string>
+    <string name="done">완료</string>
+    <string name="trending">트렌딩</string>
+    <string name="all_game">모든 게임</string>
+    <string name="record">기록</string>
+    <string name="setting">설정</string>
+    <string name="about">정보</string>
+    <string name="rate_us">App Store에서 평가하기</string>
+    <string name="share_app">이 앱 공유하기</string>
+    <string name="send_feedback">피드백 보내기</string>
+    <string name="term_privacy">약관 및 개인정보 보호</string>
+    <string name="term_conditions">이용 약관</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="exit_title">나가시겠습니까?</string>
+    <string name="exit_msg">저장하지 않고 나가시겠습니까?</string>
+    <string name="cancel">취소</string>
+    <string name="ok">확인</string>
+    <string name="add_sound">사운드 추가</string>
+    <string name="no_sound">사운드 없음</string>
+    <string name="sound_title">사운드</string>
+    <string name="lip_pose">립 포즈</string>
+    <string name="this_or_that">이것 아니면 저것</string>
+    <string name="princess_or_witch">공주 또는 마녀</string>
+    <string name="ranking">랭킹</string>
+    <string name="intro_des_1">좋아하는 헤어 컬러를 평가해 보세요.\n 무엇이 핫하고 무엇이 아닌지</string>
+    <string name="intro_title_2">당신의 기분을 믹스하세요</string>
+    <string name="intro_des_2">유쾌한 즐겨찾기 매시업을 즉시 만들어보세요.</string>
+    <string name="intro_title_3">필터 퓨전 펀</string>
+    <string name="intro_des_3">미친 필터로 당신의 창의력에 도전하세요!</string>
+    <string name="create_challenge_now">지금 챌린지 만들기</string>
+    <string name="save_success">저장 성공</string>
+    <string name="txt_share">공유</string>
+    <string name="txt_download">다운로드</string>
+</resources>
