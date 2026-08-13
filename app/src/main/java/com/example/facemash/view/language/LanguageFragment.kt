@@ -61,7 +61,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
         languageAdapter.submitList(Helper.languageList)
 
 
-        (requireActivity().application as App).collapsibleAds.loadCollapsibleAds(requireActivity(), binding.adCollapsibleView)
+//        (requireActivity().application as App).collapsibleAds.loadCollapsibleAds(requireActivity(), binding.adCollapsibleView)
 
     }
 
@@ -85,7 +85,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
 
             PreferenceUtils.setValue(Constants.LANGUAGE_CODE, languageCode)
 
-            (requireActivity().application as App).interAds.showInterAds(requireActivity())
+//            (requireActivity().application as App).interAds.showInterAds(requireActivity())
             
             val fromSplash = arguments?.getBoolean("from_splash", false) ?: false
             if (fromSplash) {
@@ -107,7 +107,7 @@ class LanguageFragment : BaseFragment<FragmentLanguageBinding>(FragmentLanguageB
     }
 
     override fun onDestroyView() {
-        (requireActivity().application as App).collapsibleAds.onDestroy()
+//        (requireActivity().application as App).collapsibleAds.onDestroy()
         super.onDestroyView()
     }
 }

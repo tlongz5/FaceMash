@@ -74,5 +74,10 @@
         android:name="com.example.facemash.view.RecordDetailFragment"
         android:label="RecordDetailFragment"
         tools:layout="@layout/fragment_record_detail" />
+    <fragment
+        android:id="@+id/handCardFragment"
+        android:name="com.example.facemash.view.handcard.HandCardFragment"
+        android:label="fragment_hand_card"
+        tools:layout="@layout/fragment_hand_card" />
 
 </navigation>

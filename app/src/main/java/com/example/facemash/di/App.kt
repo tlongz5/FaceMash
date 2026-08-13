@@ -23,14 +23,14 @@ class App: Application(){
         PreferenceUtils.init(this)
         PlayerInstance.initPlayer(this)
         MusicPlayerInstance.initPlayer(this)
-        MobileAds.initialize(this)
-        appOpenAdManager = AppOpenAdManager(this)
-        registerActivityLifecycleCallbacks(appOpenAdManager)
-//        ProcessLifecycleOwner.get().lifecycle.addObserver(appOpenAdManager)
-
-        interAds = InterAds(this)
-        interAds.loadInterAds()
-        collapsibleAds = CollapsibleAds()
-        nativeAds = NativeAds()
+//        MobileAds.initialize(this)
+//        appOpenAdManager = AppOpenAdManager(this)
+//        registerActivityLifecycleCallbacks(appOpenAdManager)
+////        ProcessLifecycleOwner.get().lifecycle.addObserver(appOpenAdManager)
+//
+//        interAds = InterAds(this)
+//        interAds.loadInterAds()
+//        collapsibleAds = CollapsibleAds()
+//        nativeAds = NativeAds()
     }
 }

@@ -53,6 +53,12 @@ class AllGameFragment : BaseFragment<FragmentAllGameBinding>(FragmentAllGameBind
                 navigateTo(R.id.princessOrWitchFragment)
             }
         }
+        btnHandCard.setSingleClick {
+            checkPermission {
+                viewModel.dataMusicFromAssets.value?.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+                navigateTo(R.id.handCardFragment)
+            }
+        }
         btnSetting.setSingleClick {
             navigateTo(R.id.settingFragment)
         }

@@ -48,8 +48,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             findNavController().navigate(R.id.languageFragment, bundle, navOptions)
         }
 
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+//        val adRequest = AdRequest.Builder().build()
+//        adView.loadAd(adRequest)
 
     }
 

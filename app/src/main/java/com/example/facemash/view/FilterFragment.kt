@@ -35,6 +35,10 @@ class FilterFragment : BaseFragment<FragmentFilterBinding>(FragmentFilterBinding
             viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
             navigateTo(R.id.princessOrWitchFragment)
         }
+        btnHandCard.setSingleClick {
+            viewModel.dataMusicFromAssets.value!!.find { it.name == "APT" }?.let { viewModel.setSelectedMusic(it) }
+            navigateTo(R.id.handCardFragment)
+        }
         btnBack.setSingleClick {
             navigateUp()
         }

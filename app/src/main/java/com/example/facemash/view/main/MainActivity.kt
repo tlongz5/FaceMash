@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
         windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
-        val manager = (application as App).appOpenAdManager
-        manager.loadAd(this)
+//        val manager = (application as App).appOpenAdManager
+//        manager.loadAd(this)
 
         registerReceiver(networkReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }

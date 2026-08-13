@@ -10,7 +10,7 @@ import com.example.facemash.R
 import com.example.facemash.databinding.DialogRateBinding
 import com.example.facemash.databinding.FragmentSettingBinding
 import com.example.facemash.base.BaseFragment
-import com.example.facemash.databinding.LayoutNativeAdSettingBinding
+// import com.example.facemash.databinding.LayoutNativeAdSettingBinding
 import com.example.facemash.di.App
 import com.example.facemash.utils.openAppInStore
 import com.example.facemash.utils.sendMail
@@ -20,25 +20,25 @@ import com.google.android.gms.ads.nativead.NativeAdView
 
 class SettingFragment: BaseFragment<FragmentSettingBinding>(FragmentSettingBinding::inflate) {
     override fun FragmentSettingBinding.initView() {
-        (requireActivity().application as App).nativeAds.loadNativeAds(requireContext()) { nativeAd ->
-            val adBinding = LayoutNativeAdSettingBinding.inflate(layoutInflater)
-            val adView = adBinding.root 
-            adView.headlineView = adBinding.adHeadline
-            adView.bodyView = adBinding.adBody
-            adView.callToActionView = adBinding.adCallToAction
-            adView.iconView = adBinding.adAppIcon
-            adView.mediaView = adBinding.adMedia
-
-            adBinding.adHeadline.text = nativeAd.headline
-            adBinding.adBody.text = nativeAd.body
-            adBinding.adCallToAction.text = nativeAd.callToAction
-            adBinding.adAppIcon.setImageDrawable(nativeAd.icon?.drawable)
-
-            adView.setNativeAd(nativeAd)
-
-            adContainer.removeAllViews()
-            adContainer.addView(adView)
-        }
+//        (requireActivity().application as App).nativeAds.loadNativeAds(requireContext()) { nativeAd ->
+//            val adBinding = LayoutNativeAdSettingBinding.inflate(layoutInflater)
+//            val adView = adBinding.root 
+//            adView.headlineView = adBinding.adHeadline
+//            adView.bodyView = adBinding.adBody
+//            adView.callToActionView = adBinding.adCallToAction
+//            adView.iconView = adBinding.adAppIcon
+//            adView.mediaView = adBinding.adMedia
+//
+//            adBinding.adHeadline.text = nativeAd.headline
+//            adBinding.adBody.text = nativeAd.body
+//            adBinding.adCallToAction.text = nativeAd.callToAction
+//            adBinding.adAppIcon.setImageDrawable(nativeAd.icon?.drawable)
+//
+//            adView.setNativeAd(nativeAd)
+//
+//            adContainer.removeAllViews()
+//            adContainer.addView(adView)
+//        }
     }
 
     override fun FragmentSettingBinding.initListener() {

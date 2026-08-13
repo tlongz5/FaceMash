@@ -46,6 +46,10 @@ android {
 }
 
 dependencies {
+    implementation("com.google.mediapipe:tasks-vision:latest.release")
+    implementation("com.google.mediapipe:tasks-text:latest.release")
+    implementation("com.google.mediapipe:tasks-audio:latest.release")
+
     implementation("com.google.android.gms:play-services-ads:25.4.0")
     implementation("androidx.lifecycle:lifecycle-process:2.8.4")
 
